@@ -1,0 +1,69 @@
+import org.gradle.api.plugins.tomcat.tasks.TomcatRun
+import org.gradle.api.plugins.tomcat.tasks.TomcatStop
+
+description = "jersey server for ncu activity service"
+
+apply plugin: 'tomcat'
+apply plugin: 'tomcat-base'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.2.4'
+    }
+}
+
+dependencies {
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:7.0.11",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:7.0.11"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:7.0.11") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+
+    runtime 'mysql:mysql-connector-java:5.1.32'
+    runtime 'com.h2database:h2:1.4.181'
+
+    compile project(":activity-data")
+    compile 'c3p0:c3p0:0.9.1.2'
+    compile 'org.springframework:spring-orm:4.1.1.RELEASE'
+    compile 'org.springframework:spring-webmvc:4.1.1.RELEASE'
+    compile 'org.hibernate:hibernate-entitymanager:4.3.6.Final'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.3'
+
+}
+
+war{
+    archiveName = 'activity-server.war'
+}
+
+ext {
+    tomcatStopPort = 8592
+    tomcatStopKey  = 'stopKey'
+}
+
+task integrationTomcatRun( type: TomcatRun ) {
+    ajpPort  = 5566
+    httpPort = 8591
+    daemon = true
+    stopPort = tomcatStopPort
+    stopKey  = tomcatStopKey
+}
+
+task integrationTomcatStop( type: TomcatStop ) {
+    stopPort = tomcatStopPort
+    stopKey  = tomcatStopKey
+}
+
+task integrationTest( type: Test ) {
+    include '**/*IntegrationTest.*'
+    dependsOn   integrationTomcatRun
+    finalizedBy integrationTomcatStop
+}
+
+test {
+    exclude '**/*IntegrationTest.*'
+}

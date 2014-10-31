@@ -11,6 +11,13 @@
         </property>
     </bean>
 
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}" />
+        <property name="jdbcUrl"     value="${jdbc.url}" />
+        <property name="user"        value="${jdbc.username}" />
+        <property name="password"    value="${jdbc.password}" />
+    </bean>
+
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitManager">
             <bean class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
@@ -36,18 +43,10 @@
         </property>
     </bean>
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${jdbc.driver}" />
-        <property name="jdbcUrl"     value="${jdbc.url}" />
-        <property name="user"        value="${jdbc.username}" />
-        <property name="password"    value="${jdbc.password}" />
-    </bean>
-
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
     <bean id="persistenceAnnotationBeanPostProcessor" class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-
 
 </beans>

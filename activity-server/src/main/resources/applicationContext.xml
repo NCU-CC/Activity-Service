@@ -13,6 +13,21 @@
     <context:annotation-config />
     <context:component-scan base-package="tw.edu.ncu.cc.activity.server" />
     <tx:annotation-driven />
-    <mvc:annotation-driven />
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="customMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="customMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+        <property name="dateFormat">
+            <bean class="java.text.SimpleDateFormat">
+                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm" />
+            </bean>
+        </property>
+    </bean>
 
 </beans>

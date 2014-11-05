@@ -10,7 +10,6 @@
 		http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
 
-    <context:annotation-config />
     <context:component-scan base-package="tw.edu.ncu.cc.activity.server" />
     <tx:annotation-driven />
 
@@ -22,12 +21,9 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <bean id="customMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
-        <property name="dateFormat">
-            <bean class="java.text.SimpleDateFormat">
-                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm" />
-            </bean>
-        </property>
-    </bean>
+    <import resource="jsonMapper.xml"/>
+    <import resource="conversion.xml"/>
+    <import resource="db/db_dev.xml"/>
+    <import resource="db/db_production.xml"/>
 
 </beans>

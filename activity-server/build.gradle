@@ -31,8 +31,11 @@ dependencies {
     compile 'c3p0:c3p0:0.9.1.2'
     compile 'org.springframework:spring-orm:4.1.1.RELEASE'
     compile 'org.springframework:spring-webmvc:4.1.1.RELEASE'
+    compile 'org.springframework:spring-test:4.1.1.RELEASE'
+    compile 'org.spockframework:spock-spring:1.0-groovy-2.3-SNAPSHOT'
     compile 'org.hibernate:hibernate-entitymanager:4.3.6.Final'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.3'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
 
 }
 
@@ -59,11 +62,13 @@ task integrationTomcatStop( type: TomcatStop ) {
 }
 
 task integrationTest( type: Test ) {
+    System.properties["spring.profiles.active"] = "dev_integration"
     include '**/*IntegrationTest.*'
     dependsOn   integrationTomcatRun
     finalizedBy integrationTomcatStop
 }
 
 test {
+    System.properties["spring.profiles.active"] = "dev_unit"
     exclude '**/*IntegrationTest.*'
 }

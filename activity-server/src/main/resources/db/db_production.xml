@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans profile="production" xmlns="http://www.springframework.org/schema/beans"
+<beans profile="production"
+       xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:connectionSetting.properties</value>
+                <value>classpath:db/db.properties</value>
             </list>
         </property>
     </bean>
@@ -26,18 +27,13 @@
         </property>
 
         <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="true" />
-                <property name="generateDdl" value="true" />
-                <property name="databasePlatform" value="${jdbc.dialect}" />
-            </bean>
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
 
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-                <prop key="hibernate.transaction.flush_before_completion">${hibernate.transaction.flush_before_completion}</prop>
+                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
                 <prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop>
             </props>
         </property>
@@ -46,7 +42,5 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
-
-    <bean id="persistenceAnnotationBeanPostProcessor" class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 </beans>

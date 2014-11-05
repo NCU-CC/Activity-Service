@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans profile="dev_integration"
+<beans profile="dev"
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
@@ -8,16 +8,9 @@
        http://www.springframework.org/schema/jdbc
        http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <property name="driverClassName" value="org.h2.Driver" />
-        <property name="url" value="jdbc:h2:tcp://localhost/mem:test" />
-        <property name="username" value="sa" />
-        <property name="password" value="sa" />
-    </bean>
-
-    <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
-        <jdbc:script location="classpath:data_integration.sql" />
-    </jdbc:initialize-database>
+    <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:data_test.sql" />
+    </jdbc:embedded-database>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitManager">
@@ -25,11 +18,19 @@
                 <property name="defaultDataSource" ref="dataSource" />
             </bean>
         </property>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
             </props>
         </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
 </beans>

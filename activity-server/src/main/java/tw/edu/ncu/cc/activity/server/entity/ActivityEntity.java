@@ -38,7 +38,7 @@ public class ActivityEntity {
         this.name = name;
     }
 
-    @ManyToOne
+    @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "club_id" )
     public ClubEntity getClub() {
         return club;

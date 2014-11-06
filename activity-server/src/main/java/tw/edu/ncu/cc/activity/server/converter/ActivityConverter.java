@@ -32,7 +32,7 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
         try {
             activity.setClub( source.getClub().getName() );
         } catch ( Exception ignore ) { //TODO NEED CONFIRM
-            activity.setClub( "無" );
+            activity.setClub( null );
         }
 
         if ( StringUtils.isEmpty( source.getInSchoolPlace() ) ) {

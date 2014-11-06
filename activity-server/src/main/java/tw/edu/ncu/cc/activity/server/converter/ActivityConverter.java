@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import tw.edu.ncu.cc.activity.data.Activity;
 import tw.edu.ncu.cc.activity.server.entity.ActivityEntity;
+import tw.edu.ncu.cc.activity.server.entity.ClubEntity;
+import tw.edu.ncu.cc.activity.server.repository.ClubRepository;
 import tw.edu.ncu.cc.activity.server.repository.PlaceRepository;
 
 import java.text.ParseException;
@@ -16,10 +18,16 @@ import java.util.Date;
 public class ActivityConverter implements Converter< ActivityEntity, Activity > {
 
     private PlaceRepository placeRepository;
+    private ClubRepository clubRepository;
 
     @Autowired
     public void setPlaceRepository( PlaceRepository placeRepository ) {
         this.placeRepository = placeRepository;
+    }
+
+    @Autowired
+    public void setClubRepository( ClubRepository clubRepository ) {
+        this.clubRepository = clubRepository;
     }
 
     @Override
@@ -29,12 +37,23 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
         activity.setName( source.getName() );
         activity.setContent( source.getContent() );
 
-        try {
-            activity.setClub( source.getClub().getName() );
-        } catch ( Exception ignore ) { //TODO NEED CONFIRM
-            activity.setClub( null );
-        }
+        buildClub ( source, activity );
+        buildPlace( source, activity );
+        buildTime ( source, activity );
 
+        return activity;
+    }
+
+    private void buildClub( ActivityEntity source, Activity activity ) {
+        ClubEntity club = clubRepository.getClub( source.getClub() );
+        if ( club == null ) {
+            activity.setClub( null );
+        } else {
+            activity.setClub( club.getName() );
+        }
+    }
+
+    private void buildPlace( ActivityEntity source, Activity activity ) {
         if ( StringUtils.isEmpty( source.getInSchoolPlace() ) ) {
             activity.setPlace( source.getOutSchoolPlace() );
         } else {
@@ -44,7 +63,9 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
                             .getName()
             );
         }
+    }
 
+    private void buildTime( ActivityEntity source, Activity activity ) {
         if( StringUtils.isEmpty( source.getStartTimes() ) ) {
             activity.setStart( source.getStartDate() );
         } else {
@@ -54,10 +75,8 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
         if( StringUtils.isEmpty( source.getEndTimes() ) ) {
             activity.setEnd( source.getEndDate() );
         } else {
-            activity.setEnd  ( new Date( time( source.getEndTimes() ) ) );
+            activity.setEnd( new Date( time( source.getEndTimes() ) ) );
         }
-
-        return activity;
     }
 
     private long time( String time ) {

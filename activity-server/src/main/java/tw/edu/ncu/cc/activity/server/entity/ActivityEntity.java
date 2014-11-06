@@ -9,7 +9,7 @@ public class ActivityEntity {
 
     private int id;
     private String name;
-    private ClubEntity club;
+    private String club;
     private String inSchoolPlace;
     private String outSchoolPlace;
     private String content;
@@ -38,13 +38,13 @@ public class ActivityEntity {
         this.name = name;
     }
 
-    @ManyToOne( fetch = FetchType.LAZY )
-    @JoinColumn( name = "club_id" )
-    public ClubEntity getClub() {
+    @Basic
+    @Column( name = "club_id" )
+    public String getClub() {
         return club;
     }
 
-    public void setClub( ClubEntity club ) {
+    public void setClub( String club ) {
         this.club = club;
     }
 

@@ -15,4 +15,9 @@ class ClubRepositoryImplTest extends SpringSpecification {
             clubs.size() == 6
     }
 
+    def "it can fetch ClubEntities by id"() {
+        expect:
+            clubRepository.getClub( "A001" ).getName() == "CLUB1"
+    }
+
 }

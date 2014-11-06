@@ -25,7 +25,7 @@ public class ActivityWebService {
 
     @RequestMapping( value = "v1/activity/{size}" )
     public List<Activity> getActivities( @PathVariable( "size" ) int size ) {
-        return activityService.getLatestActivities( new Date(), size );
+        return activityService.getLatestActivities( new Date(), ( size > 0 && size <= 20 ? size : 10 ) );
     }
 
 }

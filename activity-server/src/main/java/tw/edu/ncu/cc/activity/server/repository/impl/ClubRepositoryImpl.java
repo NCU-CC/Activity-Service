@@ -11,6 +11,11 @@ import java.util.List;
 public class ClubRepositoryImpl extends EntityManagerBean implements ClubRepository {
 
     @Override
+    public ClubEntity getClub( String id ) {
+        return getEntityManager().find( ClubEntity.class, id );
+    }
+
+    @Override
     public List<ClubEntity> getAllClubs() {
         return getEntityManager()
                 .createQuery( "SELECT club FROM ClubEntity club", ClubEntity.class )

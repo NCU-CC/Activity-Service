@@ -24,9 +24,17 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
 
     @Override
     public Activity convert( ActivityEntity source ) {
+
         Activity activity = new Activity();
         activity.setName( source.getName() );
-        activity.setClub( source.getClub().getName() );
+        activity.setContent( source.getContent() );
+
+        try {
+            activity.setClub( source.getClub().getName() );
+        } catch ( Exception ignore ) { //TODO NEED CONFIRM
+            activity.setClub( "無" );
+        }
+
         if ( StringUtils.isEmpty( source.getInSchoolPlace() ) ) {
             activity.setPlace( source.getOutSchoolPlace() );
         } else {
@@ -36,9 +44,19 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
                             .getName()
             );
         }
-        activity.setContent( source.getContent() );
-        activity.setStart( new Date( time( source.getStartTimes() ) ) );
-        activity.setEnd  ( new Date( time( source.getEndTimes() ) ) );
+
+        if( StringUtils.isEmpty( source.getStartTimes() ) ) {
+            activity.setStart( source.getStartDate() );
+        } else {
+            activity.setStart( new Date( time( source.getStartTimes() ) ) );
+        }
+
+        if( StringUtils.isEmpty( source.getEndTimes() ) ) {
+            activity.setEnd( source.getEndDate() );
+        } else {
+            activity.setEnd  ( new Date( time( source.getEndTimes() ) ) );
+        }
+
         return activity;
     }
 

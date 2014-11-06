@@ -6,10 +6,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/jdbc
-       http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+       http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd  ">
 
     <jdbc:embedded-database id="dataSource" type="H2">
-        <jdbc:script location="classpath:data_test.sql" />
+        <jdbc:script location="classpath:data_test.sql" encoding="UTF-8" />
     </jdbc:embedded-database>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

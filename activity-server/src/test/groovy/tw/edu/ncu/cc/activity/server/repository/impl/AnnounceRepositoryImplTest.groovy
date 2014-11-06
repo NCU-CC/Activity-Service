@@ -8,7 +8,7 @@ class AnnounceRepositoryImplTest extends SpringSpecification {
     @Autowired
     private AnnounceRepositoryImpl announceRepository;
 
-    def "it can fetch latest undisabled COMMON announces"() {
+    def "it can fetch latest undisabled COMMON AnnounceEntities"() {
         when:
             def commonAnnounces = announceRepository.getLatestCommonAnnounces( 10 )
         then:
@@ -17,7 +17,7 @@ class AnnounceRepositoryImplTest extends SpringSpecification {
             commonAnnounces.get( 1 ).getId() == 2015
     }
 
-    def "it can fetch latest undisabled GROUP announces"() {
+    def "it can fetch latest undisabled GROUP AnnounceEntities"() {
         when:
             def commonAnnounces = announceRepository.getLatestGroupAnnounces( 10 )
         then:

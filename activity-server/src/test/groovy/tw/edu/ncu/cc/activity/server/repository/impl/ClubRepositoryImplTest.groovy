@@ -8,7 +8,7 @@ class ClubRepositoryImplTest extends SpringSpecification {
     @Autowired
     private ClubRepositoryImpl clubRepository;
 
-    def "it can fetch all clubs"() {
+    def "it can fetch all ClubEntities"() {
         when:
             def clubs = clubRepository.getAllClubs()
         then:

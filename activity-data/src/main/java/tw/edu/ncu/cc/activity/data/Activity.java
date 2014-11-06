@@ -58,4 +58,33 @@ public class Activity {
     public void setEnd( Date end ) {
         this.end = end;
     }
+
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+
+        Activity activity = ( Activity ) o;
+
+        if ( !club.equals( activity.club ) ) return false;
+        if ( !content.equals( activity.content ) ) return false;
+        if ( !end.equals( activity.end ) ) return false;
+        if ( !name.equals( activity.name ) ) return false;
+        if ( !place.equals( activity.place ) ) return false;
+        if ( !start.equals( activity.start ) ) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + club.hashCode();
+        result = 31 * result + place.hashCode();
+        result = 31 * result + content.hashCode();
+        result = 31 * result + start.hashCode();
+        result = 31 * result + end.hashCode();
+        return result;
+    }
+
 }

@@ -11,7 +11,7 @@ class ActivityRepositoryImplTest extends SpringSpecification {
     @Autowired
     private ActivityRepositoryImpl activityRepository;
 
-    def "it can fetch latest activities start from specified date 1"() {
+    def "it can fetch latest ActivityEntities start from specified date 1"() {
         when:
             def activities = activityRepository.getLatestActivities(
                     new SimpleDateFormat( "yyyy-MM-dd" ).parse( "2013-09-10" ), 10
@@ -22,7 +22,7 @@ class ActivityRepositoryImplTest extends SpringSpecification {
             activities.get( 1 ).getId() == 323
     }
 
-    def "it can fetch latest activities start from specified date 2"() {
+    def "it can fetch latest ActivityEntities start from specified date 2"() {
         when:
             def activities = activityRepository.getLatestActivities(
                     new SimpleDateFormat( "yyyy-MM-dd" ).parse( "2013-09-13" ), 10

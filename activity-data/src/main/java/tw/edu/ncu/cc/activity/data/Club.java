@@ -39,4 +39,28 @@ public class Club {
         this.description = description;
     }
 
+    @Override
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+
+        Club club = ( Club ) o;
+
+        if ( !description.equals( club.description ) ) return false;
+        if ( !name.equals( club.name ) ) return false;
+        if ( !place.equals( club.place ) ) return false;
+        if ( !website.equals( club.website ) ) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + place.hashCode();
+        result = 31 * result + website.hashCode();
+        result = 31 * result + description.hashCode();
+        return result;
+    }
+
 }

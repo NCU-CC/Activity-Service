@@ -58,28 +58,7 @@ public class AnnounceWebService {
 
     @RequestMapping( value = "v1/announce/group/{size}" )
     public List<Announce> getGroupAnnounces( @PathVariable( "size" ) int size ) {
-//        return announceService.getLatestGroupAnnounces( ( size > 0 && size <= 25 ? size : 12 ) );
-        List<Announce> announces = new LinkedList<>();
-
-        Announce announce = new Announce();
-        announce.setTitle( "組務公告01" );
-        announce.setContent( "該洗洗睡囉!" );
-        announce.setTime( new Date() );
-        announces.add( announce );
-
-        announce = new Announce();
-        announce.setTitle( "組務公告02" );
-        announce.setContent( "該起床尿尿囉!" );
-        announce.setTime( new Date() );
-        announces.add( announce );
-
-        announce = new Announce();
-        announce.setTitle( "組務公告03" );
-        announce.setContent( "你還是乾脆起床吧" );
-        announce.setTime( new Date() );
-        announces.add( announce );
-
-        return announces;
+        return announceService.getLatestGroupAnnounces( ( size > 0 && size <= 25 ? size : 12 ) );
     }
 
 }

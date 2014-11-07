@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd  ">
 
     <jdbc:embedded-database id="dataSource" type="H2">
-        <jdbc:script location="classpath:db/data.sql" encoding="UTF-8" />
+        <jdbc:script location="classpath:database/data.sql" encoding="UTF-8" />
     </jdbc:embedded-database>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

@@ -23,7 +23,10 @@
 
     <import resource="jsonMapper.xml"/>
     <import resource="conversion.xml"/>
-    <import resource="db/db_dev.xml"/>
-    <import resource="db/db_production.xml"/>
+
+    <import resource="converter/converter_dev.xml"/>
+    <import resource="converter/converter_production.xml"/>
+    <import resource="database/db_dev.xml"/>
+    <import resource="database/db_production.xml"/>
 
 </beans>

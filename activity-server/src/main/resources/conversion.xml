@@ -8,8 +8,8 @@
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
+                <ref  bean="announceConverter"/>
                 <bean class="tw.edu.ncu.cc.activity.server.converter.ClubConverter"/>
-                <bean class="tw.edu.ncu.cc.activity.server.converter.AnnounceConverter"/>
                 <bean class="tw.edu.ncu.cc.activity.server.converter.ActivityConverter"/>
             </set>
         </property>

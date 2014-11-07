@@ -19,7 +19,7 @@ class AnnounceServiceImplTest extends SpringSpecification {
                     time: date( "2013-08-01 08:23:24" ),
                     title: "title2",
                     content: "content2",
-                    attachment: "file2"
+                    attachment: "prefix/file2"
             ) )
     }
 
@@ -32,7 +32,7 @@ class AnnounceServiceImplTest extends SpringSpecification {
                     time: date( "2013-07-31 08:23:24" ),
                     title: "title1",
                     content: "content1",
-                    attachment: "file1"
+                    attachment: "prefix/file1"
             ) )
     }
 

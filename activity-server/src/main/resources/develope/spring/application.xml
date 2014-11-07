@@ -6,8 +6,7 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="announceConverter" class="tw.edu.ncu.cc.activity.server.converter.AnnounceConverter">
-        <property name="attachmentPrefix" value="prefix/"/>
-    </bean>
+    <import resource="converter.xml"/>
+    <import resource="database.xml"/>
 
 </beans>

@@ -21,12 +21,15 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <import resource="jsonMapper.xml"/>
-    <import resource="conversion.xml"/>
+    <bean id="customMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+        <property name="dateFormat">
+            <bean class="java.text.SimpleDateFormat">
+                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm" />
+            </bean>
+        </property>
+    </bean>
 
-    <import resource="converter/converter_dev.xml"/>
-    <import resource="converter/converter_production.xml"/>
-    <import resource="database/db_dev.xml"/>
-    <import resource="database/db_production.xml"/>
+    <import resource="develope/spring/application.xml"/>
+    <import resource="production/spring/application.xml"/>
 
 </beans>

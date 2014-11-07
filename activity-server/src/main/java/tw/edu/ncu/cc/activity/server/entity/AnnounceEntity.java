@@ -27,7 +27,7 @@ public class AnnounceEntity {
     }
 
     @Basic
-    @Column( name = "major", columnDefinition = "tinyint" )
+    @Column( name = "major" )
     public boolean isMajor() {
         return major;
     }
@@ -37,7 +37,7 @@ public class AnnounceEntity {
     }
 
     @Basic
-    @Column( name = "disable", columnDefinition = "tinyint" )
+    @Column( name = "disable" )
     public boolean isDisabled() {
         return isDisabled;
     }
@@ -57,7 +57,7 @@ public class AnnounceEntity {
     }
 
     @Basic
-    @Column( name = "Title", columnDefinition = "text" )
+    @Column( name = "Title" )
     public String getTitle() {
         return title;
     }
@@ -67,7 +67,7 @@ public class AnnounceEntity {
     }
 
     @Basic
-    @Column( name = "Content", columnDefinition = "text" )
+    @Column( name = "Content" )
     public String getContent() {
         return content;
     }
@@ -87,7 +87,7 @@ public class AnnounceEntity {
     }
 
     @Basic
-    @Column( name = "upfile", columnDefinition = "text" )
+    @Column( name = "upfile" )
     public String getAttachment() {
         return attachment;
     }

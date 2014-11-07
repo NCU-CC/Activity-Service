@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import tw.edu.ncu.cc.activity.data.Announce;
 import tw.edu.ncu.cc.activity.server.service.AnnounceService;
 
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -25,35 +23,7 @@ public class AnnounceWebService {
 
     @RequestMapping( value = "v1/announce/common/{size}" )
     public List<Announce> getCommonAnnounces( @PathVariable( "size" ) int size ) {
-//        return announceService.getLatestCommonAnnounces( ( size > 0 && size <= 50 ? size : 25 ) );
-        List<Announce> announces = new LinkedList<>();
-
-        Announce announce = new Announce();
-        announce.setTitle( "一般公告01" );
-        announce.setContent( "野" );
-        announce.setTime( new Date() );
-        announces.add( announce );
-
-        announce = new Announce();
-        announce.setTitle( "一般公告02" );
-        announce.setContent( "格" );
-        announce.setTime( new Date() );
-        announces.add( announce );
-
-        announce = new Announce();
-        announce.setTitle( "一般公告03" );
-        announce.setContent( "炸" );
-        announce.setTime( new Date() );
-        announces.add( announce );
-
-        announce = new Announce();
-        announce.setTitle( "一般公告04" );
-        announce.setContent( "斷!" );
-        announce.setTime( new Date() );
-        announce.setAttachment( "http://www.cc.ncu.edu.tw/" );
-        announces.add( announce );
-
-        return announces;
+        return announceService.getLatestCommonAnnounces( ( size > 0 && size <= 50 ? size : 25 ) );
     }
 
     @RequestMapping( value = "v1/announce/group/{size}" )

@@ -1,12 +1,10 @@
 package tw.edu.ncu.cc.activity.server.webservice
 
 import specification.IntegrationSpecification
-import spock.lang.Ignore
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@Ignore //TODO FIX
 class AnnounceWebServiceTest extends IntegrationSpecification {
 
     def "it can provide latest undisabled COMMON Announces"() {
@@ -22,7 +20,7 @@ class AnnounceWebServiceTest extends IntegrationSpecification {
                     {
                         "title"   : "title2",
                         "content" : "content2",
-                        "attachment" : "file2",
+                        "attachment" : "prefix/file2",
                         "time" : "2013-08-01 08:23"
                     }
                     '''
@@ -42,7 +40,7 @@ class AnnounceWebServiceTest extends IntegrationSpecification {
                     {
                         "title"   : "title1",
                         "content" : "content1",
-                        "attachment" : "file1",
+                        "attachment" : "prefix/file1",
                         "time" : "2013-07-31 08:23"
                     }
                     '''

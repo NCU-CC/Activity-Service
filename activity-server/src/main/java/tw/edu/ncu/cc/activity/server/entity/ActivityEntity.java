@@ -69,7 +69,7 @@ public class ActivityEntity {
     }
 
     @Basic
-    @Column( name = "plan_content", columnDefinition = "longtext" )
+    @Column( name = "plan_content" )
     public String getContent() {
         return content;
     }
@@ -79,7 +79,7 @@ public class ActivityEntity {
     }
 
     @Basic
-    @Column( name = "plan_time1", columnDefinition = "text" )
+    @Column( name = "plan_time1" )
     public Date getStartDate() {
         return startDate;
     }
@@ -89,7 +89,7 @@ public class ActivityEntity {
     }
 
     @Basic
-    @Column( name = "plan_time2", columnDefinition = "text" )
+    @Column( name = "plan_time2" )
     public Date getEndDate() {
         return endDate;
     }
@@ -99,7 +99,7 @@ public class ActivityEntity {
     }
 
     @Basic
-    @Column( name = "active_time2", columnDefinition = "text" )
+    @Column( name = "active_time2" )
     public String getStartTimes() {
         return startTimes;
     }
@@ -109,7 +109,7 @@ public class ActivityEntity {
     }
 
     @Basic
-    @Column( name = "active_time3", columnDefinition = "text" )
+    @Column( name = "active_time3" )
     public String getEndTimes() {
         return endTimes;
     }

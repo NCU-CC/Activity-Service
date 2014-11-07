@@ -57,7 +57,7 @@ public class AnnounceEntity {
     }
 
     @Basic
-    @Column( name = "Title", columnDefinition = "clob" )
+    @Column( name = "Title", columnDefinition = "text" )
     public String getTitle() {
         return title;
     }
@@ -67,7 +67,7 @@ public class AnnounceEntity {
     }
 
     @Basic
-    @Column( name = "Content", columnDefinition = "clob" )
+    @Column( name = "Content", columnDefinition = "text" )
     public String getContent() {
         return content;
     }
@@ -87,7 +87,7 @@ public class AnnounceEntity {
     }
 
     @Basic
-    @Column( name = "upfile", columnDefinition = "clob" )
+    @Column( name = "upfile", columnDefinition = "text" )
     public String getAttachment() {
         return attachment;
     }

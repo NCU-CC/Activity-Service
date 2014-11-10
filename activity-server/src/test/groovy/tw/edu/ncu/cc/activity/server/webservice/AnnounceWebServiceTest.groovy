@@ -45,6 +45,16 @@ class AnnounceWebServiceTest extends IntegrationSpecification {
                     }
                     '''
             ) )
+            response.contains( JSON(
+                    '''
+                    {
+                        "title"   : "title4",
+                        "content" : "content4",
+                        "attachment" : null,
+                        "time" : "2013-08-03 08:23"
+                    }
+                    '''
+            ) )
     }
 
 }

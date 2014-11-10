@@ -17,7 +17,7 @@ class AnnounceServiceImplTest extends SpringSpecification {
             announces.size() == 2
             announces.contains( new Announce(
                     time: date( "2013-08-01 08:23:24" ),
-                    title: "title2",
+                    title:   "title2",
                     content: "content2",
                     attachment: "prefix/file2"
             ) )
@@ -30,9 +30,15 @@ class AnnounceServiceImplTest extends SpringSpecification {
             announces.size() == 2
             announces.contains( new Announce(
                     time: date( "2013-07-31 08:23:24" ),
-                    title: "title1",
+                    title:   "title1",
                     content: "content1",
                     attachment: "prefix/file1"
+            ) )
+            announces.contains( new Announce(
+                    time: date( "2013-08-03 08:23:24" ),
+                    title:   "title4",
+                    content: "content4",
+                    attachment: null
             ) )
     }
 

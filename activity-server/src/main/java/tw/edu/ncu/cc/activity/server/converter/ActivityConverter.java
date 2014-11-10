@@ -54,12 +54,13 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
     }
 
     private void buildPlace( ActivityEntity source, Activity activity ) {
-        if ( StringUtils.isEmpty( source.getInSchoolPlace() ) ) {
+        int placeID = Integer.parseInt( source.getInSchoolPlace() );
+        if ( placeID == -1 ) {
             activity.setPlace( source.getOutSchoolPlace() );
         } else {
             activity.setPlace(
                     placeRepository
-                            .getPlace( Integer.parseInt( source.getInSchoolPlace() ) )
+                            .getPlace( placeID )
                             .getName()
             );
         }

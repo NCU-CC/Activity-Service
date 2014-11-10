@@ -16,10 +16,10 @@ class ClubServiceImplTest extends SpringSpecification {
         then:
             clubs.size() == 6
             clubs.contains( new Club(
-                    name: "CLUB1",
-                    place: "place1",
-                    description: "1111",
-                    website: "site1"
+                    name:    "CLUB1",
+                    place:   "place1",
+                    website: "site1",
+                    description: "1111"
             ) )
     }
 

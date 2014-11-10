@@ -10,7 +10,7 @@ import org.springframework.web.context.WebApplicationContext
 
 public abstract class IntegrationSpecification extends SpringSpecification {
 
-    private WebApplicationContext webApplicationContext;
+    private WebApplicationContext webApplicationContext
     private MockMvc mockMvc
 
     @Autowired
@@ -18,12 +18,12 @@ public abstract class IntegrationSpecification extends SpringSpecification {
         this.webApplicationContext = webApplicationContext
     }
 
-    public MockMvc server() {
-        return mockMvc
-    }
-
     def setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup( webApplicationContext ).build()
+    }
+
+    public MockMvc server() {
+        return mockMvc;
     }
 
     protected static Object JSON( String body ) {

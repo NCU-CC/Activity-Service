@@ -42,7 +42,7 @@ dependencies {
 
 }
 
-war{
+war {
     archiveName = 'activity-server.war'
 }
 
@@ -51,13 +51,14 @@ ext {
     tomcatStopKey  = 'stopKey'
 }
 
-task testTomcatRun( type: TomcatRun ) {
-    System.properties['spring.profiles.active'] = "dev"
+task SpringMVCRun( type: TomcatRun ) {
+    System.properties['spring.profiles.active'] = "production"
     stopPort = tomcatStopPort
     stopKey  = tomcatStopKey
 }
 
-task testTomcatStop( type: TomcatStop ) {
+task SpringMVCStop( type: TomcatStop ) {
     stopPort = tomcatStopPort
     stopKey  = tomcatStopKey
 }
+

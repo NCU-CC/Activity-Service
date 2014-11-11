@@ -2,17 +2,22 @@
 <beans profile="production"
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="${jdbc.driver}" />
         <property name="jdbcUrl"     value="${jdbc.url}" />
-        <property name="user"        value="${jdbc.username}" />
-        <property name="password"    value="${jdbc.password}" />
         <property name="properties"  ref="connectionProperties"/>
     </bean>
+
+    <jdbc:initialize-database data-source="dataSource" enabled="${init_database}">
+        <jdbc:script location="${init_database_file}" encoding="UTF-8" />
+    </jdbc:initialize-database>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitManager">

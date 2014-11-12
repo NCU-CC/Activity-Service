@@ -18,27 +18,41 @@ buildscript {
 
 dependencies {
 
+    compile project(":activity-data")
+
+    //    spring configuration
+    compile 'org.springframework:spring-orm:4.1.1.RELEASE'
+    compile 'org.springframework:spring-webmvc:4.1.1.RELEASE'
+    compile 'org.springframework:spring-test:4.1.1.RELEASE'
+    compile 'org.springframework:spring-context-support:4.1.1.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.3'
+    compile 'org.aspectj:aspectjweaver:1.8.4'
+
+    //    cache
+    compile ( 'net.sf.ehcache:ehcache:2.9.0' ) {
+        exclude group: 'org.slf4j'
+    }
+
+    //    data source configuration
+    compile 'c3p0:c3p0:0.9.1.2'
+    compile 'org.hibernate:hibernate-entitymanager:4.3.6.Final'
+
+    //    java servlet api
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    //    database connector
+    runtime 'mysql:mysql-connector-java:5.1.32'
+    runtime 'com.h2database:h2:1.4.181'
+
+    //    only for test
+    testCompile 'org.spockframework:spock-spring:1.0-groovy-2.3-SNAPSHOT'
+    testCompile 'com.jayway.jsonpath:json-path-assert:0.9.1'
+
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:7.0.11",
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:7.0.11"
     tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:7.0.11") {
         exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
     }
-
-    runtime 'mysql:mysql-connector-java:5.1.32'
-    runtime 'com.h2database:h2:1.4.181'
-
-    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
-
-    testCompile 'com.jayway.jsonpath:json-path-assert:0.9.1'
-
-    compile project(":activity-data")
-    compile 'c3p0:c3p0:0.9.1.2'
-    compile 'org.springframework:spring-orm:4.1.1.RELEASE'
-    compile 'org.springframework:spring-webmvc:4.1.1.RELEASE'
-    compile 'org.springframework:spring-test:4.1.1.RELEASE'
-    compile 'org.spockframework:spock-spring:1.0-groovy-2.3-SNAPSHOT'
-    compile 'org.hibernate:hibernate-entitymanager:4.3.6.Final'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.3'
 
 }
 

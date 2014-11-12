@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS news (
   NewsType VARCHAR(10) NOT NULL DEFAULT '一般',
   major    TINYINT     NOT NULL,
   Time     TIMESTAMP   NULL,
+  DeadTime DATE NULL,
   Title    TEXT        NOT NULL,
   Content  LONGTEXT    NOT NULL,
   upfile   TEXT,
@@ -29,13 +30,14 @@ CREATE TABLE IF NOT EXISTS news (
   PRIMARY KEY (NewsID)
 );
 
-INSERT INTO news (NewsID, NewsType, major, Time, Title, Content, upfile, disable) VALUES
-  (2014, '組務', 0, '2013-07-31 08:23:24', 'title1', 'content1', 'file1', 0),
-  (2015, '一般', 0, '2013-08-01 08:23:24', 'title2', 'content2', 'file2', 0),
-  (2016, '一般', 0, '2013-08-02 08:23:24', 'title3', 'content3', 'file3', 0),
-  (2017, '組務', 1, '2013-08-03 08:23:24', 'title4', 'content4', '', 0),
-  (2018, '一般', 0, '2013-08-04 08:23:24', 'title5', 'content5', 'file5', 1),
-  (2019, '組務', 1, '2013-08-05 08:23:24', 'title6', 'content6', 'file6', 1);
+INSERT INTO news (NewsID, NewsType, major, Time, DeadTime, Title, Content, upfile, disable) VALUES
+  (2014, '組務', 0, '2013-07-31 08:23:24', NULL, 'title1', 'content1', 'file1', 0),
+  (2015, '一般', 0, '2013-08-01 08:23:24', NULL, 'title2', 'content2', 'file2', 0),
+  (2016, '一般', 0, '2013-08-02 08:23:24', NULL, 'title3', 'content3', 'file3', 0),
+  (2017, '組務', 1, '2013-08-03 08:23:24', NULL, 'title4', 'content4', '', 0),
+  (2018, '一般', 0, '2013-08-04 08:23:24', NULL, 'title5', 'content5', 'file5', 1),
+  (2019, '組務', 1, '2013-08-05 08:23:24', NULL, 'title6', 'content6', 'file6', 1),
+  (2020, '組務', 0, '2013-08-06 08:23:24', '2013-08-08', 'title7', 'content7', 'file7', 0);
 
 CREATE TABLE IF NOT EXISTS plan (
   plan_id      INT(50)      NOT NULL AUTO_INCREMENT,

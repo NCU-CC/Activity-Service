@@ -9,6 +9,7 @@ import tw.edu.ncu.cc.activity.server.entity.AnnounceEntity;
 import tw.edu.ncu.cc.activity.server.repository.AnnounceRepository;
 import tw.edu.ncu.cc.activity.server.service.AnnounceService;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,14 +30,14 @@ public class AnnounceServiceImpl implements AnnounceService {
 
     @Override
     @SuppressWarnings( "unchecked" )
-    public List<Announce> getLatestCommonAnnounces( int limit ) {
-        return getAnnounces( announceRepository.getLatestCommonAnnounces( limit ) );
+    public List<Announce> getLatestCommonAnnounces( Date dateNow, int limit ) {
+        return getAnnounces( announceRepository.getLatestCommonAnnounces( dateNow, limit ) );
     }
 
     @Override
     @SuppressWarnings( "unchecked" )
-    public List<Announce> getLatestGroupAnnounces( int limit ) {
-        return getAnnounces( announceRepository.getLatestGroupAnnounces( limit ) );
+    public List<Announce> getLatestGroupAnnounces( Date dateNow, int limit ) {
+        return getAnnounces( announceRepository.getLatestGroupAnnounces( dateNow, limit ) );
     }
 
     @SuppressWarnings( "unchecked" )

@@ -16,4 +16,8 @@ public abstract class SpringSpecification extends Specification {
         return new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" ).parse( dateString );
     }
 
+    protected static Date simpleDate( String dateString ) {
+        return new SimpleDateFormat( "yyyy-MM-dd" ).parse( dateString );
+    }
+
 }

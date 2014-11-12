@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tw.edu.ncu.cc.activity.data.Announce;
 import tw.edu.ncu.cc.activity.server.service.AnnounceService;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,12 +24,12 @@ public class AnnounceWebService {
 
     @RequestMapping( value = "v1/announce/common/{size}" )
     public List<Announce> getCommonAnnounces( @PathVariable( "size" ) int size ) {
-        return announceService.getLatestCommonAnnounces( ( size > 0 && size <= 50 ? size : 25 ) );
+        return announceService.getLatestCommonAnnounces( new Date(), ( size > 0 && size <= 50 ? size : 25 ) );
     }
 
     @RequestMapping( value = "v1/announce/group/{size}" )
     public List<Announce> getGroupAnnounces( @PathVariable( "size" ) int size ) {
-        return announceService.getLatestGroupAnnounces( ( size > 0 && size <= 25 ? size : 12 ) );
+        return announceService.getLatestGroupAnnounces( new Date(), ( size > 0 && size <= 25 ? size : 12 ) );
     }
 
 }

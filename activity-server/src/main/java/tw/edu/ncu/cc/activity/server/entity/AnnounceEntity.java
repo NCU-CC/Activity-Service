@@ -14,6 +14,7 @@ public class AnnounceEntity {
     private String title;
     private String content;
     private Date time;
+    private Date deadTime;
     private String attachment;
 
     @Id
@@ -84,6 +85,16 @@ public class AnnounceEntity {
 
     public void setTime( Date time ) {
         this.time = time;
+    }
+
+    @Basic
+    @Column( name = "DeadTime" )
+    public Date getDeadTime() {
+        return deadTime;
+    }
+
+    public void setDeadTime( Date deadTime ) {
+        this.deadTime = deadTime;
     }
 
     @Basic

@@ -28,10 +28,8 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.3'
     compile 'org.aspectj:aspectjweaver:1.8.4'
 
-    //    cache
-    compile ( 'net.sf.ehcache:ehcache:2.8.4' ) {
-        exclude group: 'org.slf4j'
-    }
+//        cache
+    compile ( 'net.sf.ehcache:ehcache:2.9.0' )
 
     //    data source configuration
     compile 'c3p0:c3p0:0.9.1.2'
@@ -43,6 +41,9 @@ dependencies {
     //    database connector
     runtime 'mysql:mysql-connector-java:5.1.32'
     runtime 'com.h2database:h2:1.4.181'
+
+    //   logger
+    runtime "org.slf4j:slf4j-log4j12:1.7.7"
 
     //    only for test
     testCompile 'org.spockframework:spock-spring:1.0-groovy-2.3-SNAPSHOT'

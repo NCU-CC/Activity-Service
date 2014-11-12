@@ -29,7 +29,7 @@ dependencies {
     compile 'org.aspectj:aspectjweaver:1.8.4'
 
     //    cache
-    compile ( 'net.sf.ehcache:ehcache:2.9.0' ) {
+    compile ( 'net.sf.ehcache:ehcache:2.8.4' ) {
         exclude group: 'org.slf4j'
     }
 

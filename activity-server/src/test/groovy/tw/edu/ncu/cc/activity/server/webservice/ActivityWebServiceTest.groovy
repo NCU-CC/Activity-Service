@@ -16,7 +16,7 @@ class ActivityWebServiceTest extends IntegrationSpecification {
                     .andReturn()
             );
         then:
-            response.size() == 2
+            response.size() == 3
             response.contains( JSON(
                     '''
                     {
@@ -38,6 +38,18 @@ class ActivityWebServiceTest extends IntegrationSpecification {
                         "content" : "content5",
                         "start" : "2050-09-14 00:00",
                         "end"   : "2050-09-15 00:00"
+                    }
+                    '''
+            ) )
+            response.contains( JSON(
+                    '''
+                    {
+                        "name"    : "Activity6",
+                        "club"    : null,
+                        "place"   : "place6",
+                        "content" : "content6",
+                        "start" : "2050-09-15 00:00",
+                        "end"   : "2050-09-16 00:00"
                     }
                     '''
             ) )

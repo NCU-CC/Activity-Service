@@ -66,7 +66,7 @@ public class Activity {
 
         Activity activity = ( Activity ) o;
 
-        if ( !club.equals( activity.club ) ) return false;
+        if ( club != null ? !club.equals( activity.club ) : activity.club != null ) return false;
         if ( !content.equals( activity.content ) ) return false;
         if ( !end.equals( activity.end ) ) return false;
         if ( !name.equals( activity.name ) ) return false;
@@ -79,7 +79,7 @@ public class Activity {
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + club.hashCode();
+        result = 31 * result + ( club != null ? club.hashCode() : 0 );
         result = 31 * result + place.hashCode();
         result = 31 * result + content.hashCode();
         result = 31 * result + start.hashCode();

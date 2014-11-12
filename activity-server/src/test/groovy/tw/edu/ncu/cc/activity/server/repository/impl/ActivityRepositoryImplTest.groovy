@@ -14,7 +14,7 @@ class ActivityRepositoryImplTest extends SpringSpecification {
                     simpleDate( "2013-09-10" ), 10
             )
         then:
-            activities.size() == 5
+            activities.size() == 6
             activities.get( 0 ).getId() == 322
             activities.get( 1 ).getId() == 323
     }
@@ -25,9 +25,10 @@ class ActivityRepositoryImplTest extends SpringSpecification {
                     simpleDate( "2013-09-13" ), 10
             )
         then:
-            activities.size() == 2
+            activities.size() == 3
             activities.get( 0 ).getId() == 325
             activities.get( 1 ).getId() == 326
+            activities.get( 2 ).getId() == 327
     }
 
 }

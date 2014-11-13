@@ -19,7 +19,7 @@ class AnnounceRepositoryImplTest extends SpringSpecification {
         when:
             def groupAnnounces = announceRepository.getLatestGroupAnnounces( new Date(), 10 )
         then:
-            groupAnnounces.size() == 3
+            groupAnnounces.size() == 2
     }
 
 }

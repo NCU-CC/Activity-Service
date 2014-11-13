@@ -6,6 +6,8 @@ import tw.edu.ncu.cc.activity.server.repository.AnnounceRepository;
 import tw.edu.ncu.cc.activity.server.repository.impl.base.EntityManagerBean;
 
 import javax.persistence.TemporalType;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +20,10 @@ public class AnnounceRepositoryImpl extends EntityManagerBean implements Announc
                 .createQuery(
                         "SELECT announce FROM AnnounceEntity announce " +
                                 "WHERE announce.type = '一般' AND announce.disabled = false " +
-                                "AND ( announce.deadTime IS NULL OR announce.deadTime = '0000-00-00' " +
+                                "AND ( announce.deadTime IS NULL OR announce.deadTime < :dateZero " +
                                 "OR :dateNow <= announce.deadTime )" +
                                 "ORDER BY announce.time DESC", AnnounceEntity.class )
+                .setParameter( "dateZero", dateZero(), TemporalType.DATE  )
                 .setParameter( "dateNow", dateNow, TemporalType.DATE )
                 .setMaxResults( limit )
                 .getResultList();
@@ -32,12 +35,21 @@ public class AnnounceRepositoryImpl extends EntityManagerBean implements Announc
                 .createQuery(
                         "SELECT announce FROM AnnounceEntity announce " +
                                 "WHERE announce.type = '組務' AND announce.disabled = false " +
-                                "AND ( announce.deadTime IS NULL OR announce.deadTime = '0000-00-00' " +
+                                "AND ( announce.deadTime IS NULL OR announce.deadTime < :dateZero " +
                                 "OR :dateNow <= announce.deadTime )" +
                                 "ORDER BY announce.time DESC", AnnounceEntity.class )
+                .setParameter( "dateZero", dateZero(), TemporalType.DATE )
                 .setParameter( "dateNow", dateNow, TemporalType.DATE )
                 .setMaxResults( limit )
                 .getResultList();
+    }
+
+    private Date dateZero() {
+        try {
+            return new SimpleDateFormat( "yyyy-MM-dd" ).parse( "0001-01-01" );
+        } catch ( ParseException e ) {
+            throw new RuntimeException( "cannot convert date zero", e );
+        }
     }
 
 }

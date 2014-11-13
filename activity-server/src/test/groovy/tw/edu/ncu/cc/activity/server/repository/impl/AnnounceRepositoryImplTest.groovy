@@ -13,18 +13,13 @@ class AnnounceRepositoryImplTest extends SpringSpecification {
             def commonAnnounces = announceRepository.getLatestCommonAnnounces( new Date(), 10 )
         then:
             commonAnnounces.size() == 2
-            commonAnnounces.get( 0 ).getId() == 2016
-            commonAnnounces.get( 1 ).getId() == 2015
     }
 
     def "it can fetch latest undisabled GROUP AnnounceEntities"() {
         when:
             def groupAnnounces = announceRepository.getLatestGroupAnnounces( new Date(), 10 )
         then:
-            groupAnnounces.size() == 2
-            groupAnnounces.get( 0 ).getId() == 2017
-            groupAnnounces.get( 1 ).getId() == 2014
+            groupAnnounces.size() == 3
     }
-
 
 }

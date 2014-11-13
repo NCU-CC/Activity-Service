@@ -17,9 +17,10 @@ public class AnnounceRepositoryImpl extends EntityManagerBean implements Announc
         return getEntityManager()
                 .createQuery(
                         "SELECT announce FROM AnnounceEntity announce " +
-                        "WHERE announce.type = '一般' AND announce.disabled = false " +
-                        "AND ( announce.deadTime IS NULL OR :dateNow <= announce.deadTime )"+
-                        "ORDER BY announce.time DESC", AnnounceEntity.class )
+                                "WHERE announce.type = '一般' AND announce.disabled = false " +
+                                "AND ( announce.deadTime IS NULL OR announce.deadTime = '0000-00-00' " +
+                                "OR :dateNow <= announce.deadTime )" +
+                                "ORDER BY announce.time DESC", AnnounceEntity.class )
                 .setParameter( "dateNow", dateNow, TemporalType.DATE )
                 .setMaxResults( limit )
                 .getResultList();
@@ -31,7 +32,8 @@ public class AnnounceRepositoryImpl extends EntityManagerBean implements Announc
                 .createQuery(
                         "SELECT announce FROM AnnounceEntity announce " +
                                 "WHERE announce.type = '組務' AND announce.disabled = false " +
-                                "AND ( announce.deadTime IS NULL OR :dateNow <= announce.deadTime )" +
+                                "AND ( announce.deadTime IS NULL OR announce.deadTime = '0000-00-00' " +
+                                "OR :dateNow <= announce.deadTime )" +
                                 "ORDER BY announce.time DESC", AnnounceEntity.class )
                 .setParameter( "dateNow", dateNow, TemporalType.DATE )
                 .setMaxResults( limit )

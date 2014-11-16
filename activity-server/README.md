@@ -1,5 +1,5 @@
 ## Activity-Server 
-This is a restful web service written in Java
+A restful web service written in Java
 
 ## Dependencies
 - Spring 4.1
@@ -23,8 +23,8 @@ This is a restful web service written in Java
 resources are divided into two environments for Spring
 
 - develope   : include embedded database and mocked elements
-- production : additional cache and remote database configuration, need to put the following five documents to /production
-    - ehcache.xml( standard ehcahe setting, cache name need to be 'production' )
+- production : additional cache and remote database configuration, must put the following five documents to src/main/resources/production
+    - ehcache.xml( standard ehcahe setting, cache name must be 'production' )
     
     - connection.properties
     ```
@@ -52,5 +52,5 @@ resources are divided into two environments for Spring
     
     - remote.properties
     ```
-    remote.attachment.url = http://example.com/attachment
+    remote.attachment.url = http://example.com/attachment/
     ```

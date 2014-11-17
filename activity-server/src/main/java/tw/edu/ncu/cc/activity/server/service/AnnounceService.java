@@ -1,6 +1,6 @@
 package tw.edu.ncu.cc.activity.server.service;
 
-import tw.edu.ncu.cc.activity.data.Announce;
+import tw.edu.ncu.cc.activity.data.v1.Announce;
 
 import java.util.Date;
 import java.util.List;

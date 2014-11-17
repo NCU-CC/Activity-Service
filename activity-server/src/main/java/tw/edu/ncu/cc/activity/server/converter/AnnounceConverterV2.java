@@ -2,10 +2,10 @@ package tw.edu.ncu.cc.activity.server.converter;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.util.StringUtils;
-import tw.edu.ncu.cc.activity.data.v1.Announce;
+import tw.edu.ncu.cc.activity.data.v2.Announce;
 import tw.edu.ncu.cc.activity.server.entity.AnnounceEntity;
 
-public class AnnounceConverter implements Converter< AnnounceEntity, Announce > {
+public class AnnounceConverterV2 implements Converter< AnnounceEntity, Announce > {
 
     private String attachmentPrefix = "";
 
@@ -16,6 +16,7 @@ public class AnnounceConverter implements Converter< AnnounceEntity, Announce > 
     @Override
     public Announce convert( AnnounceEntity source ) {
         Announce announce = new Announce();
+        announce.setId( source.getId() );
         announce.setTime( source.getTime() );
         announce.setTitle( source.getTitle() );
         announce.setContent( source.getContent() );

@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.data;
+package tw.edu.ncu.cc.activity.data.v1;
 
 import java.util.Date;
 

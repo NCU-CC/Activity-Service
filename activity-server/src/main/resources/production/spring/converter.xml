@@ -11,6 +11,9 @@
                 <bean class="tw.edu.ncu.cc.activity.server.converter.AnnounceConverter">
                     <property name="attachmentPrefix" value="${remote.attachment.url}"/>
                 </bean>
+                <bean class="tw.edu.ncu.cc.activity.server.converter.AnnounceConverterV2">
+                    <property name="attachmentPrefix" value="${remote.attachment.url}"/>
+                </bean>
                 <bean class="tw.edu.ncu.cc.activity.server.converter.ClubConverter"/>
                 <bean class="tw.edu.ncu.cc.activity.server.converter.ActivityConverter"/>
             </set>

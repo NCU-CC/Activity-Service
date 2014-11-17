@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import tw.edu.ncu.cc.activity.data.Activity;
+import tw.edu.ncu.cc.activity.data.v1.Activity;
 import tw.edu.ncu.cc.activity.server.entity.ActivityEntity;
 import tw.edu.ncu.cc.activity.server.entity.ClubEntity;
 import tw.edu.ncu.cc.activity.server.repository.ClubRepository;

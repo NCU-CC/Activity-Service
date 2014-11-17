@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import tw.edu.ncu.cc.activity.data.Activity;
+import tw.edu.ncu.cc.activity.data.v1.Activity;
 import tw.edu.ncu.cc.activity.server.service.ActivityService;
 
 import java.util.Date;

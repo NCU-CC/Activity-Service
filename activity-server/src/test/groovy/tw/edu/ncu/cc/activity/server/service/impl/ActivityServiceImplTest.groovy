@@ -2,7 +2,7 @@ package tw.edu.ncu.cc.activity.server.service.impl
 
 import org.springframework.beans.factory.annotation.Autowired
 import specification.SpringSpecification
-import tw.edu.ncu.cc.activity.data.Activity
+import tw.edu.ncu.cc.activity.data.v1.Activity
 
 
 class ActivityServiceImplTest extends SpringSpecification {

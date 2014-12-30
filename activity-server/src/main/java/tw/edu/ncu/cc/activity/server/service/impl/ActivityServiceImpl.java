@@ -10,6 +10,7 @@ import tw.edu.ncu.cc.activity.server.repository.ActivityRepository;
 import tw.edu.ncu.cc.activity.server.service.ActivityService;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -32,10 +33,25 @@ public class ActivityServiceImpl implements ActivityService {
     @SuppressWarnings( "unchecked" )
     public List< Activity > getLatestActivities( Date startDate, int limit ) {
         return ( List< Activity > ) conversionService.convert(
-                activityRepository.getLatestActivities( startDate, limit ),
+                filt( activityRepository.getLatestActivities( startDate, limit ) ),
                 TypeDescriptor.collection( List.class, TypeDescriptor.valueOf( ActivityEntity.class ) ),
                 TypeDescriptor.collection( List.class, TypeDescriptor.valueOf( Activity.class ) )
         );
+    }
+
+    private List< ActivityEntity > filt( List< ActivityEntity > activityEntities ) {
+        List< ActivityEntity > resultList = new LinkedList<>();
+        for ( ActivityEntity activityEntity : activityEntities ) {
+            if( isCorrectFormat( activityEntity.getStartDate() ) &&
+                isCorrectFormat( activityEntity.getEndDate() ) ) {
+                resultList.add( activityEntity );
+            }
+        }
+        return resultList;
+    }
+
+    private boolean isCorrectFormat( String dateString ) {
+        return dateString.trim().length() == 10; // ex:2014-01-05
     }
 
 }

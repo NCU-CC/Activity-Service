@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping( method = RequestMethod.GET )
 public class ActivityWebService {
 
-    private ActivityService activityService;
+    private ActivityService activityService ;
 
     @Autowired
     public void setActivityService( ActivityService activityService ) {

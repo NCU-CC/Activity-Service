@@ -68,24 +68,33 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
 
     private void buildTime( ActivityEntity source, Activity activity ) {
         if( StringUtils.isEmpty( source.getStartTimes() ) ) {
-            activity.setStart( source.getStartDate() );
+            activity.setStart( dateTime( source.getStartDate() ) );
         } else {
-            activity.setStart( new Date( time( source.getStartTimes() ) ) );
+            activity.setStart( new Date( fetchTime( source.getStartTimes() ) ) );
         }
 
         if( StringUtils.isEmpty( source.getEndTimes() ) ) {
-            activity.setEnd( source.getEndDate() );
+            activity.setEnd( dateTime( source.getEndDate() ) );
         } else {
-            activity.setEnd( new Date( time( source.getEndTimes() ) ) );
+            activity.setEnd( new Date( fetchTime( source.getEndTimes() ) ) );
         }
     }
 
-    private long time( String time ) {
+    private long fetchTime( String time ) {
         try {
             String dateString = time.substring( 0, time.indexOf( '&' ) );
             return new SimpleDateFormat( "yyyy-MM-dd HH:mm" )
                     .parse( dateString )
                     .getTime();
+        } catch ( ParseException e ) {
+            throw new RuntimeException( "cannot parse date", e );
+        }
+    }
+
+    private Date dateTime( String time ) {
+        try {
+            return new SimpleDateFormat( "yyyy-MM-dd" )
+                    .parse( time );
         } catch ( ParseException e ) {
             throw new RuntimeException( "cannot parse date", e );
         }

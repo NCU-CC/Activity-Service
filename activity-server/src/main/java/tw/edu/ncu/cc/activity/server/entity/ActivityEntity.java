@@ -1,7 +1,6 @@
 package tw.edu.ncu.cc.activity.server.entity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table( name = "plan" )
@@ -13,8 +12,8 @@ public class ActivityEntity {
     private String inSchoolPlace;
     private String outSchoolPlace;
     private String content;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String startTimes;
     private String endTimes;
 
@@ -80,21 +79,21 @@ public class ActivityEntity {
 
     @Basic
     @Column( name = "plan_time1" )
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate( Date startDate ) {
+    public void setStartDate( String startDate ) {
         this.startDate = startDate;
     }
 
     @Basic
     @Column( name = "plan_time2" )
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate( Date endDate ) {
+    public void setEndDate( String endDate ) {
         this.endDate = endDate;
     }
 

@@ -5,10 +5,10 @@ import specification.SpringSpecification
 import tw.edu.ncu.cc.activity.data.v2.Announce
 
 
-class AnnounceServiceImplV2Test extends SpringSpecification {
+class AnnounceServiceV2ImplTest extends SpringSpecification {
 
     @Autowired
-    private AnnounceServiceImplV2 announceService
+    private AnnounceServiceV2Impl announceService
 
     def "it can fetch latest undisabled COMMON Announces"() {
         when:

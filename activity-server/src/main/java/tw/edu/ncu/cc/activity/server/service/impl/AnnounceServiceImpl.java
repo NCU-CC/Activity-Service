@@ -1,6 +1,7 @@
 package tw.edu.ncu.cc.activity.server.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Service;
@@ -29,11 +30,13 @@ public class AnnounceServiceImpl implements AnnounceService {
     }
 
     @Override
+    @Cacheable( value = "production", key = "'announcesCommonLatest:' + #limit" )
     public List<Announce> getLatestCommonAnnounces( Date dateNow, int limit ) {
         return getAnnounces( announceRepository.getLatestCommonAnnounces( dateNow, limit ) );
     }
 
     @Override
+    @Cacheable( value = "production", key = "'announcesGroupLatest:' + #limit" )
     public List<Announce> getLatestGroupAnnounces( Date dateNow, int limit ) {
         return getAnnounces( announceRepository.getLatestGroupAnnounces( dateNow, limit ) );
     }

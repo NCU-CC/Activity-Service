@@ -1,6 +1,7 @@
 package tw.edu.ncu.cc.activity.server.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class ClubServiceImpl implements ClubService {
 
     @Override
     @SuppressWarnings( "unchecked" )
+    @Cacheable( value = "production", key = "'clubsAll'" )
     public List<Club> getAllClubs() {
         return ( List<Club> ) conversionService.convert(
                 clubRepository.getAllClubs(),

@@ -1,6 +1,7 @@
 package tw.edu.ncu.cc.activity.server.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     @SuppressWarnings( "unchecked" )
+    @Cacheable( value = "production", key = "'activitiesLatest:' + #limit" )
     public List< Activity > getLatestActivities( Date startDate, int limit ) {
         return ( List< Activity > ) conversionService.convert(
                 filt( activityRepository.getLatestActivities( startDate, limit ) ),

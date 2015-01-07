@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.webservice
+package tw.edu.ncu.cc.activity.server.controller
 
 import specification.IntegrationSpecification
 
@@ -6,12 +6,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 
-class ActivityWebServiceV2Test extends IntegrationSpecification {
+class ActivityControllerTest extends IntegrationSpecification {
 
     def "it can provide all Activities"() {
         when:
             def response = JSON( server()
-                    .perform( get( "/v2/activity?size=10" ).accept( "application/json" ) )
+                    .perform( get( "/v1/activity/10" ).accept( "application/json" ) )
                     .andExpect( status().isOk() )
                     .andReturn()
             );

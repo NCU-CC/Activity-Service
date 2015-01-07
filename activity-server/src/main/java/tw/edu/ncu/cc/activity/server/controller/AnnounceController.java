@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.webservice;
+package tw.edu.ncu.cc.activity.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping( method = RequestMethod.GET )
-public class AnnounceWebService {
+public class AnnounceController {
 
     private AnnounceService announceService;
 

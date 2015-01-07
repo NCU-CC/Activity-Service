@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.webservice;
+package tw.edu.ncu.cc.activity.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping( method = RequestMethod.GET )
-public class AnnounceWebServiceV2 {
+public class AnnounceControllerV2 {
 
     private AnnounceServiceV2 announceServiceV2;
 

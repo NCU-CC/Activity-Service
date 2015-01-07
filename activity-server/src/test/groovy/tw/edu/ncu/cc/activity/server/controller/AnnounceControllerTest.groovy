@@ -1,11 +1,11 @@
-package tw.edu.ncu.cc.activity.server.webservice
+package tw.edu.ncu.cc.activity.server.controller
 
 import specification.IntegrationSpecification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-class AnnounceWebServiceTest extends IntegrationSpecification {
+class AnnounceControllerTest extends IntegrationSpecification {
 
     def "it can provide latest undisabled COMMON Announces"() {
         when:

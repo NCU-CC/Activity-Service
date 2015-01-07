@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.webservice
+package tw.edu.ncu.cc.activity.server.controller
 
 import specification.IntegrationSpecification
 
@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 
-class AnnounceWebServiceV2Test2 extends IntegrationSpecification {
+class AnnounceControllerV2Test2 extends IntegrationSpecification {
 
     def "it can provide latest undisabled GROUP Announces"() {
         when:

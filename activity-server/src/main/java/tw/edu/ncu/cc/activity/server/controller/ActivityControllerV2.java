@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.webservice;
+package tw.edu.ncu.cc.activity.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping( method = RequestMethod.GET )
-public class ActivityWebServiceV2 {
+public class ActivityControllerV2 {
 
     private ActivityService activityService;
 

@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 
 @WebAppConfiguration
 @ActiveProfiles( "dev" )
-@ContextConfiguration( "classpath:application.xml" )
+@ContextConfiguration( [ "classpath:spring-core.xml", "classpath:spring-mvc.xml" ] )
 public abstract class SpringSpecification extends Specification {
 
     protected static Date date( String dateString ) {

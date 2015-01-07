@@ -7,17 +7,18 @@ A restful web service written in Java
 - EHcache 2.9
 - C3P0 0.9
 - JPA 2.0
+- H2 1.4
 
 ## Gradle
-- SpringMVCRun  : run activity-server in embedded tomcat with 'production' environment
-- SpringMVCStop : stop the tomcat server launched by task 'SpringMVCRun'
+- jettyStart  : run server in embedded server
+- jettyStop   : stop the server started by command above
 
 ## Packages
-- entity     : hibernate orm bean
+- controller : restful web-service provider
 - converter  : spring type converter
+- entity     : hibernate orm bean
 - repository : data access object
 - service    : service provider
-- webservice : rest web service
 
 ## Resources
 resources are divided into two environments for Spring

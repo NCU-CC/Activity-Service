@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.repository.impl.base;
+package tw.edu.ncu.cc.activity.server.service.impl;
 
 import org.springframework.stereotype.Repository;
 
@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class EntityManagerBean {
+public class ApplicationService {
 
     private EntityManager entityManager;
 

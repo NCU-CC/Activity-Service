@@ -1,17 +1,17 @@
-package tw.edu.ncu.cc.activity.server.controller;
+package tw.edu.ncu.cc.activity.server.controller.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import tw.edu.ncu.cc.activity.data.v1.Club;
+import tw.edu.ncu.cc.activity.server.controller.api.ApplicationController;
+import tw.edu.ncu.cc.activity.server.entity.ClubEntity;
 import tw.edu.ncu.cc.activity.server.service.ClubService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping( method = RequestMethod.GET )
-public class ClubController {
+public class ClubController extends ApplicationController {
 
     private ClubService clubService;
 
@@ -21,8 +21,10 @@ public class ClubController {
     }
 
     @RequestMapping( value = "v1/club" )
-    public List<Club> getClubs() {
-        return clubService.getAllClubs();
+    public Club[] getClubs() {
+        return convert(
+                clubService.getAllClubs(), ClubEntity.class, Club.class
+        );
     }
 
 }

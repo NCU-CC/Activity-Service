@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.controller
+package tw.edu.ncu.cc.activity.server.controller.api.v2
 
 import specification.IntegrationSpecification
 

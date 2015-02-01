@@ -7,8 +7,8 @@ import org.springframework.util.StringUtils;
 import tw.edu.ncu.cc.activity.data.v1.Activity;
 import tw.edu.ncu.cc.activity.server.entity.ActivityEntity;
 import tw.edu.ncu.cc.activity.server.entity.ClubEntity;
-import tw.edu.ncu.cc.activity.server.repository.ClubRepository;
-import tw.edu.ncu.cc.activity.server.repository.PlaceRepository;
+import tw.edu.ncu.cc.activity.server.service.ClubService;
+import tw.edu.ncu.cc.activity.server.service.PlaceService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,17 +17,17 @@ import java.util.Date;
 @Component
 public class ActivityConverter implements Converter< ActivityEntity, Activity > {
 
-    private PlaceRepository placeRepository;
-    private ClubRepository clubRepository;
+    private PlaceService placeService;
+    private ClubService clubService;
 
     @Autowired
-    public void setPlaceRepository( PlaceRepository placeRepository ) {
-        this.placeRepository = placeRepository;
+    public void setPlaceService( PlaceService placeService ) {
+        this.placeService = placeService;
     }
 
     @Autowired
-    public void setClubRepository( ClubRepository clubRepository ) {
-        this.clubRepository = clubRepository;
+    public void setClubService( ClubService clubService ) {
+        this.clubService = clubService;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
     }
 
     private void buildClub( ActivityEntity source, Activity activity ) {
-        ClubEntity club = clubRepository.getClub( source.getClub() );
+        ClubEntity club = clubService.getClub( source.getClub() );
         if ( club == null ) {
             activity.setClub( null );
         } else {
@@ -59,7 +59,7 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
             activity.setPlace( source.getOutSchoolPlace() );
         } else {
             activity.setPlace(
-                    placeRepository
+                    placeService
                             .getPlace( placeID )
                             .getName()
             );

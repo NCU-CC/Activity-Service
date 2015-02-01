@@ -13,7 +13,6 @@
 
     <context:component-scan base-package="tw.edu.ncu.cc.activity.server.converter"/>
     <context:component-scan base-package="tw.edu.ncu.cc.activity.server.entity"/>
-    <context:component-scan base-package="tw.edu.ncu.cc.activity.server.repository"/>
     <context:component-scan base-package="tw.edu.ncu.cc.activity.server.service"/>
 
     <tx:annotation-driven />

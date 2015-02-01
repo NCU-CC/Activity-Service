@@ -2,43 +2,33 @@ package tw.edu.ncu.cc.activity.server.service.impl
 
 import org.springframework.beans.factory.annotation.Autowired
 import specification.SpringSpecification
-import tw.edu.ncu.cc.activity.data.v1.Activity
-
 
 class ActivityServiceImplTest extends SpringSpecification {
 
     @Autowired
-    private ActivityServiceImpl activityService
+    private ActivityServiceImpl activityService;
 
-    def "it can fetch latest Activities start from specified date"() {
+    def "it can fetch latest ActivityEntities start from specified date 1"() {
         when:
-            def activities = activityService.getLatestActivities( new Date(), 10 )
+            def activities = activityService.getLatestActivities(
+                    simpleDate( "2013-09-10" ), 10
+            )
+        then:
+            activities.size() == 6
+            activities.get( 0 ).getId() == 322
+            activities.get( 1 ).getId() == 323
+    }
+
+    def "it can fetch latest ActivityEntities start from specified date 2"() {
+        when:
+            def activities = activityService.getLatestActivities(
+                    simpleDate( "2013-09-13" ), 10
+            )
         then:
             activities.size() == 3
-            activities.contains( new Activity(
-                    name:    "Activity4",
-                    club:    "CLUB4",
-                    place:   "place4",
-                    content: "content4",
-                    start: date( "2050-09-13 09:00:00" ),
-                    end:   date( "2050-09-14 23:00:00" )
-            ) )
-            activities.contains( new Activity(
-                    name:    "Activity5",
-                    club:    "CLUB5",
-                    place:   "place6",
-                    content: "content5",
-                    start: date( "2050-09-14 00:00:00" ),
-                    end:   date( "2050-09-15 00:00:00" )
-            ) )
-            activities.contains( new Activity(
-                    name:    "Activity6",
-                    club:    null,
-                    place:   "place6",
-                    content: "content6",
-                    start: date( "2050-09-15 00:00:00" ),
-                    end:   date( "2050-09-16 00:00:00" )
-            ) )
+            activities.get( 0 ).getId() == 325
+            activities.get( 1 ).getId() == 326
+            activities.get( 2 ).getId() == 327
     }
 
 }

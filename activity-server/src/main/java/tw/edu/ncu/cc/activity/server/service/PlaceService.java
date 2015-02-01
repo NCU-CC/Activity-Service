@@ -1,7 +1,7 @@
-package tw.edu.ncu.cc.activity.server.repository;
+package tw.edu.ncu.cc.activity.server.service;
 
 import tw.edu.ncu.cc.activity.server.entity.PlaceEntity;
 
-public interface PlaceRepository {
+public interface PlaceService {
     public PlaceEntity getPlace( int id );
 }

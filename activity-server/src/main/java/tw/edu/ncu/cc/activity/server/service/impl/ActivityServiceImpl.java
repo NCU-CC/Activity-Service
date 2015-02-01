@@ -1,7 +1,7 @@
 package tw.edu.ncu.cc.activity.server.service.impl;
 
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import tw.edu.ncu.cc.activity.server.entity.ActivityEntity;
 import tw.edu.ncu.cc.activity.server.service.ActivityService;
 
@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Repository
+@Service
 public class ActivityServiceImpl extends ApplicationService implements ActivityService {
 
     private SimpleDateFormat dateFormater = new SimpleDateFormat( "yyyy-MM-dd" );

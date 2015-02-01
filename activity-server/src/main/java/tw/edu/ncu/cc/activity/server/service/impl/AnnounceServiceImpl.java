@@ -1,7 +1,7 @@
 package tw.edu.ncu.cc.activity.server.service.impl;
 
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import tw.edu.ncu.cc.activity.server.entity.AnnounceEntity;
 import tw.edu.ncu.cc.activity.server.service.AnnounceService;
 
@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@Repository
+@Service
 public class AnnounceServiceImpl extends ApplicationService implements AnnounceService {
 
     private static Date zeroDate = dateZero();

@@ -5,20 +5,12 @@ A restful web service written in Java
 - Spring 4.1
 - Hibernate 4.3
 - EHcache 2.9
-- C3P0 0.9
+- HikariCP 2.3.1
 - JPA 2.0
-- H2 1.4
 
 ## Gradle
 - jettyStart  : run server in embedded server
 - jettyStop   : stop the server started by command above
-
-## Packages
-- controller : restful web-service provider
-- converter  : spring type converter
-- entity     : hibernate orm bean
-- repository : data access object
-- service    : service provider
 
 ## Resources
 resources are divided into two environments for Spring
@@ -29,26 +21,23 @@ resources are divided into two environments for Spring
     
     - connection.properties
     ```
-    min_size = 5
-    max_size = 75
-    ...or other c3p0 settings
-    user     = [ your database user name ]
-    password = [ your database user password ]
+    dataSourceClassName = [ your datasource class ] ( ex: com.mysql.jdbc.jdbc2.optional.MysqlDataSource )
+    dataSource.url = [ your jdbc url ] ( ex: jdbc:mysql://localhost/dbname )
+    dataSource.user = [ your user name ]
+    dataSource.password = [ your password ]
+    ... or other hikariCP settings
     ```
     
     - database.properties
     ```
-    jdbc.driver = com.mysql.jdbc.Driver
-    jdbc.url = jdbc:mysql://localhost/dbname
-    init_database = true
+    init_database = [ true / false ]
     init_database_file = classpath:develope/data.sql
     ```
     
     - hibernate.properties
     ```
     hibernate.dialect  = org.hibernate.dialect.MySQL5Dialect
-    hibernate.show_sql = true
-    ...or other hibernate setting
+    ...and other hibernate setting
     ```
     
     - remote.properties

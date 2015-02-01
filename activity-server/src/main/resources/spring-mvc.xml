@@ -14,6 +14,10 @@
     <context:component-scan base-package="tw.edu.ncu.cc.activity.server.controller" />
     <context:component-scan base-package="tw.edu.ncu.cc.activity.server.exception" />
 
+    <mvc:interceptors>
+        <bean class="tw.edu.ncu.cc.activity.server.interceptor.LoggerInterceptor"/>
+    </mvc:interceptors>
+
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

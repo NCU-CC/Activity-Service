@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.service.impl
+package tw.edu.ncu.cc.activity.server.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import specification.SpringSpecification
@@ -10,14 +10,14 @@ class ClubServiceImplTest extends SpringSpecification {
 
     def "it can fetch all ClubEntities"() {
         when:
-            def clubs = clubService.getAllClubs()
+            def clubs = clubService.findAll()
         then:
             clubs.size() == 6
     }
 
     def "it can fetch ClubEntities by id"() {
         expect:
-            clubService.getClub( "A001" ).getName() == "CLUB1"
+            clubService.findById( "A001" ).getName() == "CLUB1"
     }
 
 }

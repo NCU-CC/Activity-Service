@@ -1,9 +1,7 @@
-package tw.edu.ncu.cc.activity.server.service.impl
+package tw.edu.ncu.cc.activity.server.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import specification.SpringSpecification
-import tw.edu.ncu.cc.activity.server.service.UnitService
-
 
 class UnitServiceImplTest extends SpringSpecification {
 
@@ -12,7 +10,7 @@ class UnitServiceImplTest extends SpringSpecification {
 
     def "it can get unit by its id"() {
         expect:
-            unitService.getUnitById( 1 ).name == "unit1"
+            unitService.findById( 1 ).name == "unit1"
     }
 
 }

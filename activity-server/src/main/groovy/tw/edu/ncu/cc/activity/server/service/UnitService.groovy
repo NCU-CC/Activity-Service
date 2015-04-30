@@ -4,5 +4,5 @@ import tw.edu.ncu.cc.activity.server.entity.UnitEntity;
 
 public interface UnitService {
 
-    public UnitEntity getUnitById( int id );
+    public UnitEntity findById( int id );
 }

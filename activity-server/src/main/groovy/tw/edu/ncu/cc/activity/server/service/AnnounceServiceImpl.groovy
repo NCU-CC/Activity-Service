@@ -1,71 +1,73 @@
-package tw.edu.ncu.cc.activity.server.service.impl;
+package tw.edu.ncu.cc.activity.server.service
 
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import tw.edu.ncu.cc.activity.server.entity.AnnounceEntity;
-import tw.edu.ncu.cc.activity.server.service.AnnounceService;
+import org.springframework.cache.annotation.Cacheable
+import org.springframework.stereotype.Service
+import tw.edu.ncu.cc.activity.server.entity.AnnounceEntity
 
-import javax.persistence.TemporalType;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.EntityManager
+import javax.persistence.PersistenceContext
+import javax.persistence.TemporalType
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
 @Service
-public class AnnounceServiceImpl extends ApplicationService implements AnnounceService {
+public class AnnounceServiceImpl implements AnnounceService {
 
-    private static Date zeroDate = dateZero();
+    @PersistenceContext
+    def EntityManager entityManager
+
+    private static Date zeroDate = dateZero()
 
     private static Date dateZero() {
         try {
-            return new SimpleDateFormat( "yyyy-MM-dd" ).parse( "0001-01-01" );
+            return new SimpleDateFormat( "yyyy-MM-dd" ).parse( "0001-01-01" )
         } catch ( ParseException e ) {
-            throw new RuntimeException( "cannot convert date zero", e );
+            throw new RuntimeException( "cannot convert date zero", e )
         }
     }
 
     @Override
     @Cacheable( value = "production", key = "'announcesCommonLatest:' + #limit" )
-    public List< AnnounceEntity > getLatestCommonAnnounces( Date dateNow, int limit ) {
-        return getLatestAnnounce( "一般", dateNow, limit );
+    public List< AnnounceEntity > findCommonByDateOlderThan( Date dateNow, int limit ) {
+        getLatestAnnounce( "一般", dateNow, limit )
     }
 
     @Override
     @Cacheable( value = "production", key = "'announcesGroupLatest:' + #limit" )
-    public List< AnnounceEntity > getLatestGroupAnnounces( Date dateNow, int limit ) {
-        return getLatestAnnounce( "組務", dateNow, limit );
+    public List< AnnounceEntity > findGroupByDateOlderThan( Date dateNow, int limit ) {
+        getLatestAnnounce( "組務", dateNow, limit )
     }
 
     @Override
     @Cacheable( value = "production", key = "'announcesCommonNewer:' + #limit + '/' + #id" )
-    public List< AnnounceEntity > getCommonAnnouncesNewerThan( int id, Date dateNow, int limit ) {
-        return getAnnounceNewerThan( "一般", id, dateNow, limit );
+    public List< AnnounceEntity > findCommonByNewerThanIdAndDeadTimeOlderThan( int id, Date dateNow, int limit ) {
+        getAnnounceNewerThan( "一般", id, dateNow, limit )
     }
 
     @Override
     @Cacheable( value = "production", key = "'announcesGroupNewer:' + #limit + '/' + #id" )
-    public List< AnnounceEntity > getGroupAnnouncesNewerThan( int id, Date dateNow, int limit ) {
-        return getAnnounceNewerThan( "組務", id, dateNow, limit );
+    public List< AnnounceEntity > findGroupByNewerThanIdAndDeadTimeOlderThan( int id, Date dateNow, int limit ) {
+        getAnnounceNewerThan( "組務", id, dateNow, limit )
     }
 
     @Override
     @Cacheable( value = "production", key = "'announcesCommonOlder:' + #limit + '/' + #id" )
-    public List< AnnounceEntity > getCommonAnnouncesOlderThan( int id, Date dateNow, int limit ) {
-        return getAnnounceOlderThan( "一般", id, dateNow, limit );
+    public List< AnnounceEntity > findCommonByOlderThanIdAndDeadTimeOlderThan( int id, Date dateNow, int limit ) {
+        getAnnounceOlderThan( "一般", id, dateNow, limit )
     }
 
     @Override
     @Cacheable( value = "production", key = "'announcesGroupOlder:' + #limit + '/' + #id" )
-    public List< AnnounceEntity > getGroupAnnouncesOlderThan( int id, Date dateNow, int limit ) {
-        return getAnnounceOlderThan( "組務", id, dateNow, limit );
+    public List< AnnounceEntity > findGroupByOlderThanIdAndDeadTimeOlderThan( int id, Date dateNow, int limit ) {
+        getAnnounceOlderThan( "組務", id, dateNow, limit )
     }
 
     private List< AnnounceEntity > getLatestAnnounce( String type, Date dateNow, int limit ) {
-        return getEntityManager()
+        getEntityManager()
                 .createQuery(
                         "SELECT announce FROM AnnounceEntity announce " +
                         "WHERE announce.type = :announceType " +
-                        "AND announce.disabled = false " +
+                        "AND announce.isDisabled = false " +
                         "AND ( " +
                         "announce.deadTime IS NULL OR " +
                         "announce.deadTime < :dateZero OR" +
@@ -75,19 +77,19 @@ public class AnnounceServiceImpl extends ApplicationService implements AnnounceS
                 .setParameter( "dateZero", zeroDate, TemporalType.DATE )
                 .setParameter( "dateNow", dateNow, TemporalType.DATE )
                 .setMaxResults( limit )
-                .getResultList();
+                .getResultList()
     }
 
     private List< AnnounceEntity > getAnnounceNewerThan( String type, int id, Date dateNow, int limit ) {
-        AnnounceEntity announce = getEntityManager().find( AnnounceEntity.class, id );
+        AnnounceEntity announce = getEntityManager().find( AnnounceEntity.class, id )
         if ( announce == null ) {
-            return null;
+            return null
         } else {
             return getEntityManager()
                     .createQuery(
                             "SELECT announce FROM AnnounceEntity announce " +
                             "WHERE announce.type = :announceType " +
-                            "AND announce.disabled = false " +
+                            "AND announce.isDisabled = false " +
                             "AND ( " +
                             "announce.deadTime IS NULL OR " +
                             "announce.deadTime < :dateZero OR " +
@@ -103,20 +105,20 @@ public class AnnounceServiceImpl extends ApplicationService implements AnnounceS
                     .setParameter( "time", announce.getTime(), TemporalType.DATE )
                     .setParameter( "id", announce.getId() )
                     .setMaxResults( limit )
-                    .getResultList();
+                    .getResultList()
         }
     }
 
     private List< AnnounceEntity > getAnnounceOlderThan( String type, int id, Date dateNow, int limit ) {
-        AnnounceEntity announce = getEntityManager().find( AnnounceEntity.class, id );
+        AnnounceEntity announce = getEntityManager().find( AnnounceEntity.class, id )
         if ( announce == null ) {
-            return null;
+            return null
         } else {
             return getEntityManager()
                     .createQuery(
                             "SELECT announce FROM AnnounceEntity announce " +
                             "WHERE announce.type = :announceType " +
-                            "AND announce.disabled = false " +
+                            "AND announce.isDisabled = false " +
                             "AND ( " +
                             "announce.deadTime IS NULL OR " +
                             "announce.deadTime < :dateZero OR " +
@@ -131,7 +133,7 @@ public class AnnounceServiceImpl extends ApplicationService implements AnnounceS
                     .setParameter( "time", announce.getTime(), TemporalType.DATE )
                     .setParameter( "id", announce.getId() )
                     .setMaxResults( limit )
-                    .getResultList();
+                    .getResultList()
         }
     }
 

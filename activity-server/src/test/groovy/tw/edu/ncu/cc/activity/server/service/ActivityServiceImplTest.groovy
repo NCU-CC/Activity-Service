@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.service.impl
+package tw.edu.ncu.cc.activity.server.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import specification.SpringSpecification
@@ -10,7 +10,7 @@ class ActivityServiceImplTest extends SpringSpecification {
 
     def "it can fetch latest ActivityEntities start from specified date 1"() {
         when:
-            def activities = activityService.getLatestActivities(
+            def activities = activityService.findByStartDateOlderThan(
                     simpleDate( "2015-04-20" ), 10
             )
         then:
@@ -21,7 +21,7 @@ class ActivityServiceImplTest extends SpringSpecification {
 
     def "it can fetch latest ActivityEntities start from specified date 2"() {
         when:
-            def activities = activityService.getLatestActivities(
+            def activities = activityService.findByStartDateOlderThan(
                     simpleDate( "2025-04-20" ), 10
             )
         then:

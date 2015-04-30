@@ -1,16 +1,20 @@
 package tw.edu.ncu.cc.activity.server.entity;
 
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table( name = "place" )
-public class PlaceEntity {
+@Table( name = "admin_unit" )
+public class UnitEntity {
 
     private int id;
     private String name;
 
     @Id
-    @Column( name = "place_id" )
+    @Column( name = "office_id" )
     public int getId() {
         return id;
     }
@@ -19,8 +23,7 @@ public class PlaceEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column( name = "place_name" )
+    @Column( name = "office_name" )
     public String getName() {
         return name;
     }

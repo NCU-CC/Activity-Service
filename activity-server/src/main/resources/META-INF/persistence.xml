@@ -9,6 +9,8 @@
         <class>tw.edu.ncu.cc.activity.server.entity.ActivityEntity</class>
         <class>tw.edu.ncu.cc.activity.server.entity.PlaceEntity</class>
         <class>tw.edu.ncu.cc.activity.server.entity.ClubEntity</class>
+        <class>tw.edu.ncu.cc.activity.server.entity.PlanEntity</class>
+        <class>tw.edu.ncu.cc.activity.server.entity.UnitEntity</class>
     </persistence-unit>
 
 </persistence>

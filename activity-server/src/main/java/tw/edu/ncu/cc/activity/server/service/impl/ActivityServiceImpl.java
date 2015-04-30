@@ -5,14 +5,12 @@ import org.springframework.stereotype.Service;
 import tw.edu.ncu.cc.activity.server.entity.ActivityEntity;
 import tw.edu.ncu.cc.activity.server.service.ActivityService;
 
-import java.text.SimpleDateFormat;
+import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class ActivityServiceImpl extends ApplicationService implements ActivityService {
-
-    private SimpleDateFormat dateFormater = new SimpleDateFormat( "yyyy-MM-dd" );
 
     @Override
     @Cacheable( value = "production", key = "'activitiesLatest:' + #limit" )
@@ -20,9 +18,9 @@ public class ActivityServiceImpl extends ApplicationService implements ActivityS
         return getEntityManager()
                 .createQuery(
                         "SELECT activity FROM ActivityEntity activity " +
-                        "WHERE activity.startDate >= :startDate " +
-                        "ORDER BY activity.startDate ASC ", ActivityEntity.class )
-                .setParameter( "startDate", dateFormater.format( startDate ) )
+                        "WHERE activity.date >= :startDate " +
+                        "ORDER BY activity.date ASC ", ActivityEntity.class )
+                .setParameter( "startDate", new java.sql.Date( startDate.getTime() ), TemporalType.DATE )
                 .setMaxResults( limit )
                 .getResultList();
     }

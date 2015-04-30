@@ -1,9 +1,11 @@
-package tw.edu.ncu.cc.activity.server.converter;
+package tw.edu.ncu.cc.activity.server.converter
 
-import org.springframework.core.convert.converter.Converter;
-import tw.edu.ncu.cc.activity.data.v1.Club;
-import tw.edu.ncu.cc.activity.server.entity.ClubEntity;
+import org.springframework.core.convert.converter.Converter
+import org.springframework.stereotype.Component
+import tw.edu.ncu.cc.activity.data.v1.Club
+import tw.edu.ncu.cc.activity.server.entity.ClubEntity
 
+@Component
 public class ClubConverter implements Converter< ClubEntity, Club > {
 
     @Override

@@ -39,45 +39,63 @@ INSERT INTO news (NewsID, NewsType, major, Time, DeadTime, Title, Content, upfil
   (2019, '組務', 1, '2013-08-05 08:23:24', NULL, 'title6', 'content6', 'file6', 1),
   (2020, '組務', 0, '2013-08-06 08:23:24', '2013-08-08', 'title7', 'content7', 'file7', 0);
 
-CREATE TABLE IF NOT EXISTS plan (
-  plan_id      INT(50)      NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS plan_new (
+  plan_id INT NOT NULL AUTO_INCREMENT,
   plan_name    VARCHAR(100) NOT NULL,
-  club_id      VARCHAR(5)   NOT NULL,
-  plan_place   VARCHAR(100) NOT NULL,
-  detail_place VARCHAR(30)  NOT NULL,
-  plan_time1   TEXT         NOT NULL,
-  plan_time2   TEXT         NOT NULL,
-  plan_content LONGTEXT     NOT NULL,
-  active_time2 TEXT,
-  active_time3 TEXT,
+  plan_content LONGTEXT NOT NULL,
+  club_id VARCHAR(5) NOT NULL,
   PRIMARY KEY (plan_id)
 );
 
-INSERT INTO plan (plan_id, plan_name, club_id, plan_place, detail_place, plan_time1, plan_time2, plan_content, active_time2, active_time3 )
-VALUES
-  (322, 'Activity1', 'A001', '1', 'none', '2013-09-10', '2013-09-11', 'content1',
-   '2013-09-10 09:00&', '2013-09-11 23:00&' ),
-  (323, 'Activity2', 'A002', '2', 'none', '2013-09-11', '2013-09-12', 'content2',
-   '2013-09-11 09:00&', '2013-09-12 23:00&' ),
-  (324, 'Activity3', 'A003', '3', 'none', '2013-09-12', '2013-09-13', 'content3',
-   '2013-09-12 09:00&', '2013-09-13 23:00&' ),
-  (325, 'Activity4', 'A004', '4', 'none', '2050-09-13', '2050-09-14', 'content4',
-   '2050-09-13 09:00&', '2050-09-14 23:00&' ),
-  (326, 'Activity5', 'A005', '-1', 'place6', '2050-09-14', '2050-09-15', 'content5',
-   NULL, NULL ),
-  (327, 'Activity6', '12', '-1', 'place6', '2050-09-15', '2050-09-16', 'content6',
-   NULL, NULL );
+INSERT INTO plan_new (plan_id, plan_name, plan_content, club_id ) VALUES
+  (1, 'Activity1', 'content1', 'A001' ),
+  (2, 'Activity2', 'content2', 'A002' ),
+  (3, 'Activity3', 'content3', '1' ),
+  (4, 'Activity4', 'content4', 'A004' ),
+  (5, 'Activity5', 'content5', 'A005' ),
+  (6, 'Activity6', 'content6', '2' );
 
-
-CREATE TABLE IF NOT EXISTS active_place (
+CREATE TABLE IF NOT EXISTS place (
   place_id   INT(11)      NOT NULL AUTO_INCREMENT,
   place_name VARCHAR(100) NOT NULL,
   PRIMARY KEY (place_id)
 );
 
-INSERT INTO active_place (place_id, place_name ) VALUES
+INSERT INTO place (place_id, place_name ) VALUES
   (1, 'place1' ),
   (2, 'place2' ),
   (3, 'place3' ),
   (4, 'place4' ),
   (5, 'place5' );
+
+CREATE TABLE IF NOT EXISTS admin_unit (
+  office_id INT NOT NULL AUTO_INCREMENT,
+  office_name VARCHAR(30) NOT NULL,
+  PRIMARY KEY (office_id)
+);
+
+INSERT INTO admin_unit (office_id, office_name ) VALUES
+  (1, 'unit1' ),
+  (2, 'unit2' ),
+  (3, 'unit3' ),
+  (4, 'unit4' ),
+  (5, 'unit5' );
+
+CREATE TABLE place_appointment
+(
+  pa_date DATE NOT NULL,
+  place_id INT NOT NULL,
+  plan_id INT,
+  club_id VARCHAR(10) NOT NULL,
+  pa_description VARCHAR(200) NOT NULL,
+  pa_start_time TIME,
+  pa_end_time TIME,
+  PRIMARY KEY (pa_date, place_id)
+);
+
+INSERT INTO place_appointment (pa_date, place_id, plan_id, club_id, pa_description, pa_start_time, pa_end_time ) VALUES
+  ('2015-04-22', '1', '1', '1', 'description1', '15:00:00', '18:00:00' ),
+  ('2015-04-22', '2', '2', 'A001', 'description2', '15:00:00', '18:00:00' ),
+  ('2050-04-22', '3', NULL, 'admin', 'description3', '15:00:00', '18:00:00' ),
+  ('2050-04-22', '4', '-1', '2', 'description4', '15:00:00', '18:00:00' ),
+  ('2050-04-22', '5', '5', 'A002', 'description5', '15:00:00', '18:00:00' );

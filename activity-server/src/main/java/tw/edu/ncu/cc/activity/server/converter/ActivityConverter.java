@@ -3,13 +3,16 @@ package tw.edu.ncu.cc.activity.server.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import tw.edu.ncu.cc.activity.data.v1.Activity;
 import tw.edu.ncu.cc.activity.server.entity.ActivityEntity;
 import tw.edu.ncu.cc.activity.server.entity.ClubEntity;
+import tw.edu.ncu.cc.activity.server.entity.PlanEntity;
+import tw.edu.ncu.cc.activity.server.entity.UnitEntity;
 import tw.edu.ncu.cc.activity.server.service.ClubService;
-import tw.edu.ncu.cc.activity.server.service.PlaceService;
+import tw.edu.ncu.cc.activity.server.service.PlanService;
+import tw.edu.ncu.cc.activity.server.service.UnitService;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,84 +20,85 @@ import java.util.Date;
 @Component
 public class ActivityConverter implements Converter< ActivityEntity, Activity > {
 
-    private PlaceService placeService;
     private ClubService clubService;
-
-    @Autowired
-    public void setPlaceService( PlaceService placeService ) {
-        this.placeService = placeService;
-    }
+    private UnitService unitService;
+    private PlanService planService;
 
     @Autowired
     public void setClubService( ClubService clubService ) {
         this.clubService = clubService;
     }
 
+    @Autowired
+    public void setPlanService( PlanService planService ) {
+        this.planService = planService;
+    }
+
+    @Autowired
+    public void setUnitService( UnitService unitService ) {
+        this.unitService = unitService;
+    }
+
     @Override
     public Activity convert( ActivityEntity source ) {
 
         Activity activity = new Activity();
-        activity.setName( source.getName() );
-        activity.setContent( source.getContent() );
+        if( source.getPlanId() != null && source.getPlanId() >= 0 ) {
+            PlanEntity plan = planService.findPlanById( source.getPlanId() );
+            activity.setName( plan.getName() );
+            activity.setContent( plan.getContent() );
+            buildClubFromPlan( plan, activity );
+        } else {
+            activity.setName( source.getDescription() );
+            buildClubFromActivity( source, activity );
+        }
 
-        buildClub ( source, activity );
         buildPlace( source, activity );
         buildTime ( source, activity );
 
         return activity;
     }
 
-    private void buildClub( ActivityEntity source, Activity activity ) {
-        ClubEntity club = clubService.getClub( source.getClub() );
-        if ( club == null ) {
-            activity.setClub( null );
-        } else {
+    private void buildClubFromPlan( PlanEntity plan, Activity activity ) {
+        String sponsor = plan.getSponsor();
+        if( sponsor.length() >= 4 ) {
+            ClubEntity club = clubService.getClub( sponsor );
             activity.setClub( club.getName() );
+        } else {
+            UnitEntity unit = unitService.getUnitById( Integer.parseInt( sponsor ) );
+            activity.setClub( unit.getName() );
+        }
+    }
+
+    private void buildClubFromActivity( ActivityEntity source, Activity activity ) {
+        if( source.getClubId().equals( "admin" ) ) {
+            activity.setClub( "admin" );
+        } else if( source.getClubId().length() >= 4 ) {
+            ClubEntity club = clubService.getClub( source.getClubId() );
+            activity.setClub( club.getName() );
+        } else {
+            UnitEntity unit = unitService.getUnitById( Integer.parseInt( source.getClubId() ) );
+            activity.setClub( unit.getName() );
         }
     }
 
     private void buildPlace( ActivityEntity source, Activity activity ) {
-        int placeID = Integer.parseInt( source.getInSchoolPlace() );
-        if ( placeID == -1 ) {
-            activity.setPlace( source.getOutSchoolPlace() );
-        } else {
-            activity.setPlace(
-                    placeService
-                            .getPlace( placeID )
-                            .getName()
-            );
-        }
+        activity.setPlace( source.getPlace().getName() );
     }
 
     private void buildTime( ActivityEntity source, Activity activity ) {
-        if( StringUtils.isEmpty( source.getStartTimes() ) ) {
-            activity.setStart( dateTime( source.getStartDate() ) );
-        } else {
-            activity.setStart( new Date( fetchTime( source.getStartTimes() ) ) );
+        if( source.getStartTime() != null ) {
+            activity.setStart( dateTime( source.getDate(), source.getStartTime() ) );
         }
-
-        if( StringUtils.isEmpty( source.getEndTimes() ) ) {
-            activity.setEnd( dateTime( source.getEndDate() ) );
-        } else {
-            activity.setEnd( new Date( fetchTime( source.getEndTimes() ) ) );
+        if( source.getEndTime() != null ) {
+            activity.setEnd( dateTime( source.getDate(), source.getEndTime() ) );
         }
     }
 
-    private long fetchTime( String time ) {
+    private Date dateTime( Date date, Time time ) {
         try {
-            String dateString = time.substring( 0, time.indexOf( '&' ) );
-            return new SimpleDateFormat( "yyyy-MM-dd HH:mm" )
-                    .parse( dateString )
-                    .getTime();
-        } catch ( ParseException e ) {
-            throw new RuntimeException( "cannot parse date", e );
-        }
-    }
-
-    private Date dateTime( String time ) {
-        try {
-            return new SimpleDateFormat( "yyyy-MM-dd" )
-                    .parse( time );
+            return new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" )
+                    .parse( date + " " + time );
         } catch ( ParseException e ) {
             throw new RuntimeException( "cannot parse date", e );
         }

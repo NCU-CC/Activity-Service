@@ -1,120 +1,88 @@
 package tw.edu.ncu.cc.activity.server.entity;
 
+import tw.edu.ncu.cc.activity.server.entity.concern.ActivityKey;
+
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Time;
 
 @Entity
-@Table( name = "plan" )
+@Table( name = "place_appointment" )
+@IdClass( ActivityKey.class )
 public class ActivityEntity {
 
-    private int id;
-    private String name;
-    private String club;
-    private String inSchoolPlace;
-    private String outSchoolPlace;
-    private String content;
-    private String startDate;
-    private String endDate;
-    private String startTimes;
-    private String endTimes;
+    private Date date;
+    private PlaceEntity place;
+    private Integer planId;
+    private String clubId;
+    private String description;
+    private Time startTime;
+    private Time endTime;
 
     @Id
-    @Column( name = "plan_id" )
-    public int getId() {
-        return id;
+    @Column( name = "pa_date" )
+    public Date getDate() {
+        return date;
     }
 
-    public void setId( int id ) {
-        this.id = id;
+    public void setDate( Date date ) {
+        this.date = date;
     }
 
-    @Basic
-    @Column( name = "plan_name" )
-    public String getName() {
-        return name;
+    @Id
+    @ManyToOne
+    @JoinColumn( name = "place_id" )
+    public PlaceEntity getPlace() {
+        return place;
     }
 
-    public void setName( String name ) {
-        this.name = name;
+    public void setPlace( PlaceEntity place ) {
+        this.place = place;
     }
 
-    @Basic
+    @Column( name = "pa_description" )
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription( String description ) {
+        this.description = description;
+    }
+
     @Column( name = "club_id" )
-    public String getClub() {
-        return club;
+    public String getClubId() {
+        return clubId;
     }
 
-    public void setClub( String club ) {
-        this.club = club;
+    public void setClubId( String clubId ) {
+        this.clubId = clubId;
     }
 
-    @Basic
-    @Column( name = "plan_place" )
-    public String getInSchoolPlace() {
-        return inSchoolPlace;
+    @Column( name = "plan_id" )
+    public Integer getPlanId() {
+        return planId;
     }
 
-    public void setInSchoolPlace( String inSchoolPlace ) {
-        this.inSchoolPlace = inSchoolPlace;
+    public void setPlanId( Integer planId ) {
+        this.planId = planId;
     }
 
-    @Basic
-    @Column( name = "detail_place" )
-    public String getOutSchoolPlace() {
-        return outSchoolPlace;
+    @Column( name = "pa_start_time" )
+    public Time getStartTime() {
+        return startTime;
     }
 
-    public void setOutSchoolPlace( String outSchoolPlace ) {
-        this.outSchoolPlace = outSchoolPlace;
+    public void setStartTime( Time startTime ) {
+        this.startTime = startTime;
     }
 
-    @Basic
-    @Column( name = "plan_content" )
-    public String getContent() {
-        return content;
+    @Column( name = "pa_end_time" )
+    public Time getEndTime() {
+        return endTime;
     }
 
-    public void setContent( String content ) {
-        this.content = content;
-    }
-
-    @Basic
-    @Column( name = "plan_time1" )
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate( String startDate ) {
-        this.startDate = startDate;
-    }
-
-    @Basic
-    @Column( name = "plan_time2" )
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate( String endDate ) {
-        this.endDate = endDate;
-    }
-
-    @Basic
-    @Column( name = "active_time2" )
-    public String getStartTimes() {
-        return startTimes;
-    }
-
-    public void setStartTimes( String startTimes ) {
-        this.startTimes = startTimes;
-    }
-
-    @Basic
-    @Column( name = "active_time3" )
-    public String getEndTimes() {
-        return endTimes;
-    }
-
-    public void setEndTimes( String endTimes ) {
-        this.endTimes = endTimes;
+    public void setEndTime( Time endTime ) {
+        this.endTime = endTime;
     }
 
 }

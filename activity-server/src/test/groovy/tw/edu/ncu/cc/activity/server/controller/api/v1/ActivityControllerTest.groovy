@@ -20,12 +20,24 @@ class ActivityControllerTest extends IntegrationSpecification {
             response.contains( JSON(
                     '''
                     {
-                        "name"    : "Activity4",
-                        "club"    : "CLUB4",
+                        "name"    : "description3",
+                        "club"    : "admin",
+                        "place"   : "place3",
+                        "content" : null,
+                        "start" : "2050-04-22 15:00",
+                        "end"   : "2050-04-22 18:00"
+                    }
+                    '''
+            ) )
+            response.contains( JSON(
+                    '''
+                    {
+                        "name"    : "description4",
+                        "club"    : "unit2",
                         "place"   : "place4",
-                        "content" : "content4",
-                        "start" : "2050-09-13 09:00",
-                        "end"   : "2050-09-14 23:00"
+                        "content" : null,
+                        "start" : "2050-04-22 15:00",
+                        "end"   : "2050-04-22 18:00"
                     }
                     '''
             ) )
@@ -34,22 +46,10 @@ class ActivityControllerTest extends IntegrationSpecification {
                     {
                         "name"    : "Activity5",
                         "club"    : "CLUB5",
-                        "place"   : "place6",
+                        "place"   : "place5",
                         "content" : "content5",
-                        "start" : "2050-09-14 00:00",
-                        "end"   : "2050-09-15 00:00"
-                    }
-                    '''
-            ) )
-            response.contains( JSON(
-                    '''
-                    {
-                        "name"    : "Activity6",
-                        "club"    : null,
-                        "place"   : "place6",
-                        "content" : "content6",
-                        "start" : "2050-09-15 00:00",
-                        "end"   : "2050-09-16 00:00"
+                        "start" : "2050-04-22 15:00",
+                        "end"   : "2050-04-22 18:00"
                     }
                     '''
             ) )

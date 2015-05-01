@@ -18,7 +18,7 @@ public class ActivityController extends ApplicationController {
     def ActivityService activityService
 
     @RequestMapping
-    public Activity[] index( @RequestParam( "size" ) Integer size ) {
+    public Activity[] index( @RequestParam( value = "size", defaultValue = "20" ) Integer size ) {
         convert(
                 activityService.findByStartDateOlderThan( new Date(), ( size > 0 && size <= 40 ? size : 20 ) ),
                 ActivityEntity.class,

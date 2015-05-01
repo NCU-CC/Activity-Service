@@ -20,8 +20,8 @@ public class AnnounceController extends ApplicationController {
     def AnnounceService announceService
 
     @RequestMapping
-    public Object index( @RequestParam( "size" ) Integer size,
-                         @RequestParam( "type" ) String type,
+    public Object index( @RequestParam( "type" ) String type,
+                         @RequestParam( value = "size", defaultValue = "20" ) Integer size,
                          @RequestParam( value = "older_than", required = false ) Integer olderThanID,
                          @RequestParam( value = "newer_than", required = false ) Integer newerThanID ) {
 

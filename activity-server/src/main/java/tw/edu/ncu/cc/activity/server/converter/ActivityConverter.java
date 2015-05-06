@@ -87,10 +87,14 @@ public class ActivityConverter implements Converter< ActivityEntity, Activity > 
     }
 
     private void buildTime( ActivityEntity source, Activity activity ) {
-        if( source.getStartTime() != null ) {
+        if( source.getStartTime() == null ) {
+            activity.setStart( dateTime( source.getDate(), Time.valueOf( "00:00:00" ) ) );
+        } else {
             activity.setStart( dateTime( source.getDate(), source.getStartTime() ) );
         }
-        if( source.getEndTime() != null ) {
+        if( source.getEndTime() == null ) {
+            activity.setEnd( dateTime( source.getDate(), Time.valueOf( "23:59:59" ) ) );
+        } else {
             activity.setEnd( dateTime( source.getDate(), source.getEndTime() ) );
         }
     }

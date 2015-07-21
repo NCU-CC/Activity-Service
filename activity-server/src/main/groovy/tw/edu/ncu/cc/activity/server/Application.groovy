@@ -12,9 +12,7 @@ import tw.edu.ncu.cc.activity.server.config.CacheConfig
 import tw.edu.ncu.cc.activity.server.config.MvcConfig
 import tw.edu.ncu.cc.activity.server.config.SecurityConfig
 import tw.edu.ncu.cc.springboot.config.hikaricp.EnableHikariConfiguration
-import tw.edu.ncu.cc.springboot.config.ssl.EnableSSLConfiguration
 
-@EnableSSLConfiguration
 @EnableHikariConfiguration
 @EnableScheduling
 @SpringBootApplication( exclude = [ ErrorMvcAutoConfiguration ] )

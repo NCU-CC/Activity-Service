@@ -26,7 +26,6 @@ dependencies {
     compile project(':activity-data')
     compile name: 'oauth-resource-0.6.2'
     compile name: 'oauth-data-0.6.2'
-    compile name: 'config-ssl-0.2.0'
     compile name: 'config-hikaricp-0.2.2'
 
     compile 'org.springframework.security:spring-security-config:4.0.0.RELEASE' ,
@@ -37,7 +36,7 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-data-jpa:1.2.3.RELEASE',
             'org.springframework.boot:spring-boot-starter-web:1.2.3.RELEASE',
             'net.sf.ehcache:ehcache:2.10.0',
-            'com.zaxxer:HikariCP-java6:2.3.7'
+            'com.zaxxer:HikariCP:2.3.7'
 
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 
@@ -56,6 +55,4 @@ gretty {
     springBoot = true
     springBootVersion = '1.2.3.RELEASE'
     springBootMainClass = 'tw.edu.ncu.cc.activity.server.Application'
-    httpsEnabled = true
-    httpsPort = 5278
 }

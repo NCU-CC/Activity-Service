@@ -30,4 +30,5 @@ custom:
     config-path: production/ehcache.xml
 ncu:
   oauth:
+    api-token: your-api-token
     server-path: https://localhost/oauth

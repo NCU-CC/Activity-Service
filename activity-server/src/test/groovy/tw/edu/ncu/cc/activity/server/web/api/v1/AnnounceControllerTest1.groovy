@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.web.api.v3
+package tw.edu.ncu.cc.activity.server.web.api.v1
 
 import specification.IntegrationSpecification
 
@@ -7,13 +7,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.apiToken
 
 
-class AnnounceControllerV2Test1 extends IntegrationSpecification {
+class AnnounceControllerTest1 extends IntegrationSpecification {
 
     def "it can provide latest common announces"() {
         when:
             def response = JSON( server()
                     .perform(
-                        get( "/v3/announces?type=common&size=10" )
+                        get( "/v1/announces?type=common&size=10" )
                         .with( apiToken() )
                         .accept( "application/json" )
                     )
@@ -51,7 +51,7 @@ class AnnounceControllerV2Test1 extends IntegrationSpecification {
         when:
             def response = JSON( server()
                     .perform(
-                        get( "/v3/announces?type=common&size=10&newer_than=2015" )
+                        get( "/v1/announces?type=common&size=10&newer_than=2015" )
                         .with( apiToken() )
                         .accept( "application/json" )
                     )
@@ -79,7 +79,7 @@ class AnnounceControllerV2Test1 extends IntegrationSpecification {
         when:
             def response = JSON( server()
                     .perform(
-                        get( "/v3/announces?type=common&size=10&older_than=2016" )
+                        get( "/v1/announces?type=common&size=10&older_than=2016" )
                         .with( apiToken() )
                         .accept( "application/json" )
                     )
@@ -107,7 +107,7 @@ class AnnounceControllerV2Test1 extends IntegrationSpecification {
         when:
             def response = JSON( server()
                     .perform(
-                        get( "/v3/announces?type=common&size=10&older_than=2016&newer_than=2017" )
+                        get( "/v1/announces?type=common&size=10&older_than=2016&newer_than=2017" )
                         .with( apiToken() )
                         .accept( "application/json" )
                     )

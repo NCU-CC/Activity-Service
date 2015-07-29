@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.web.api.v3
+package tw.edu.ncu.cc.activity.server.web.api.v1
 
 import specification.IntegrationSpecification
 
@@ -7,13 +7,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.apiToken
 
 
-class ActivityControllerV2Test extends IntegrationSpecification {
+class ActivityControllerTest extends IntegrationSpecification {
 
     def "it can provide all Activities"() {
         when:
             def response = JSON( server()
                     .perform(
-                        get( "/v3/activities?size=10" )
+                        get( "/v1/activities?size=10" )
                         .with( apiToken() )
                         .accept( "application/json" )
                     )

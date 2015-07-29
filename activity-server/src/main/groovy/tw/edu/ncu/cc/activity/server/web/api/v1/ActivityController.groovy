@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.web.api.v3
+package tw.edu.ncu.cc.activity.server.web.api.v1
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
@@ -11,7 +11,7 @@ import tw.edu.ncu.cc.activity.server.service.ActivityService
 import tw.edu.ncu.cc.activity.server.web.api.ApplicationController
 
 @RestController
-@RequestMapping( value = "v3/activities", method = RequestMethod.GET )
+@RequestMapping( value = "v1/activities", method = RequestMethod.GET )
 public class ActivityController extends ApplicationController {
 
     @Autowired

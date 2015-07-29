@@ -1,4 +1,4 @@
-package tw.edu.ncu.cc.activity.server.web.api.v3
+package tw.edu.ncu.cc.activity.server.web.api.v1
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -13,7 +13,7 @@ import tw.edu.ncu.cc.activity.server.service.AnnounceService
 import tw.edu.ncu.cc.activity.server.web.api.ApplicationController
 
 @RestController
-@RequestMapping( value = "v3/announces", method = RequestMethod.GET )
+@RequestMapping( value = "v1/announces", method = RequestMethod.GET )
 public class AnnounceController extends ApplicationController {
 
     @Autowired

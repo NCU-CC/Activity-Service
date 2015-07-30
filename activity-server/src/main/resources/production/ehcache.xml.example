@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache
+         updateCheck="false"
+         dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir" />
+
+    <cache name="production"
+            maxElementsInMemory="1000"
+            maxElementsOnDisk="3000"
+            timeToLiveSeconds="20"
+            eternal="false" />
+
+</ehcache>

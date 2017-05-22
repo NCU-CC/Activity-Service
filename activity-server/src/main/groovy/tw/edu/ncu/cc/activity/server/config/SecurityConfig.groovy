@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import tw.edu.ncu.cc.oauth.resource.filter.ApiTokenDecisionFilter
+import tw.edu.ncu.cc.oauth.resource.filter.AccessTokenDecisionFilter
 
 @EnableWebSecurity
 public class SecurityConfig {
@@ -18,12 +18,12 @@ public class SecurityConfig {
     public static class OauthGuard extends WebSecurityConfigurerAdapter {
 
         @Autowired
-        def ApiTokenDecisionFilter apiTokenDecisionFilter
+        def AccessTokenDecisionFilter accessTokenDecisionFilter
 
         @Override
         protected void configure( HttpSecurity http ) throws Exception {
             http.antMatcher( "/v*/**" )
-                    .addFilterAfter( apiTokenDecisionFilter, UsernamePasswordAuthenticationFilter.class )
+                    .addFilterAfter( accessTokenDecisionFilter, UsernamePasswordAuthenticationFilter.class )
                     .csrf().disable()
         }
     }

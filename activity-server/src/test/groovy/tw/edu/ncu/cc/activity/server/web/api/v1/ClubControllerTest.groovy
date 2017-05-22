@@ -4,10 +4,12 @@ import specification.IntegrationSpecification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.apiToken
+import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.accessToken
 
 
 class ClubControllerTest extends IntegrationSpecification {
+
+    def token = accessToken().user( "user-uid" ).scope( "user.info.basic.read" )
 
     def "it can provide all Clubs"() {
         when:
@@ -15,7 +17,7 @@ class ClubControllerTest extends IntegrationSpecification {
                     server()
                     .perform(
                             get( "/v1/clubs" )
-                            .with( apiToken() )
+                            .with( token )
                             .accept( "application/json" )
                     )
                     .andExpect(

@@ -4,17 +4,19 @@ import specification.IntegrationSpecification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.apiToken
+import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.accessToken
 
 
 class AnnounceControllerTest1 extends IntegrationSpecification {
+
+    def token = accessToken().user( "user-uid" ).scope( "user.info.basic.read" )
 
     def "it can provide latest common announces"() {
         when:
             def response = JSON( server()
                     .perform(
                         get( "/v1/announces?type=common&size=10" )
-                        .with( apiToken() )
+                        .with( token )
                         .accept( "application/json" )
                     )
                     .andExpect(
@@ -52,7 +54,7 @@ class AnnounceControllerTest1 extends IntegrationSpecification {
             def response = JSON( server()
                     .perform(
                         get( "/v1/announces?type=common&size=10&newer_than=2015" )
-                        .with( apiToken() )
+                        .with( token )
                         .accept( "application/json" )
                     )
                     .andExpect(
@@ -80,7 +82,7 @@ class AnnounceControllerTest1 extends IntegrationSpecification {
             def response = JSON( server()
                     .perform(
                         get( "/v1/announces?type=common&size=10&older_than=2016" )
-                        .with( apiToken() )
+                        .with( token )
                         .accept( "application/json" )
                     )
                     .andExpect(
@@ -108,7 +110,7 @@ class AnnounceControllerTest1 extends IntegrationSpecification {
             def response = JSON( server()
                     .perform(
                         get( "/v1/announces?type=common&size=10&older_than=2016&newer_than=2017" )
-                        .with( apiToken() )
+                        .with( token )
                         .accept( "application/json" )
                     )
                     .andExpect(

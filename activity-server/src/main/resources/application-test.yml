@@ -18,3 +18,6 @@ custom:
       access: hasIpAddress('127.0.0.1') or hasIpAddress('0:0:0:0:0:0:0:1')
   remote:
     attachment-prefix: prefix/
+
+log-api:
+    uri: https://log.apitest.cc.ncu.edu.tw/log/api

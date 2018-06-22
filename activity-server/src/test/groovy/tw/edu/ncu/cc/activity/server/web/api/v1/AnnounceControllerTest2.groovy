@@ -4,12 +4,10 @@ import specification.IntegrationSpecification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.accessToken
+import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.apiToken
 
 
 class AnnounceControllerTest2 extends IntegrationSpecification {
-
-    def token = accessToken().user( "user-uid" ).scope( "user.info.basic.read" )
 
     def "it can provide latest group announces"() {
         when:
@@ -17,7 +15,7 @@ class AnnounceControllerTest2 extends IntegrationSpecification {
                     server()
                     .perform(
                             get( "/v1/announces?type=group&size=10" )
-                            .with( token )
+                            .with( apiToken() )
                             .accept( "application/json" )
                     )
                     .andExpect(
@@ -56,7 +54,7 @@ class AnnounceControllerTest2 extends IntegrationSpecification {
                     server()
                     .perform(
                             get( "/v1/announces?type=group&size=10&newer_than=2014" )
-                            .with( token )
+                            .with( apiToken() )
                             .accept( "application/json" )
                     )
                     .andExpect(
@@ -85,7 +83,7 @@ class AnnounceControllerTest2 extends IntegrationSpecification {
                     server()
                     .perform(
                             get( "/v1/announces?type=group&size=10&older_than=2017" )
-                            .with( token )
+                            .with( apiToken() )
                             .accept( "application/json" )
                     )
                     .andExpect(
@@ -114,7 +112,7 @@ class AnnounceControllerTest2 extends IntegrationSpecification {
                     server()
                     .perform(
                             get( "/v1/announces?type=group&size=10&older_than=2016&newer_than=2017" )
-                            .with( token )
+                            .with( apiToken() )
                             .accept( "application/json" )
                     )
                     .andExpect(

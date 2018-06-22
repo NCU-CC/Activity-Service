@@ -4,19 +4,17 @@ import specification.IntegrationSpecification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.accessToken
+import static tw.edu.ncu.cc.oauth.resource.test.ApiAuthMockMvcRequestPostProcessors.apiToken
 
 
 class ActivityControllerTest extends IntegrationSpecification {
-
-    def token = accessToken().user( "user-uid" ).scope( "user.info.basic.read" )
 
     def "it can provide all Activities"() {
         when:
             def response = JSON( server()
                     .perform(
                         get( "/v1/activities?size=10" )
-                        .with( token )
+                        .with( apiToken() )
                         .accept( "application/json" )
                     )
                     .andExpect(

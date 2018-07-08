@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -22,7 +23,12 @@ public class SecurityConfig {
 
         @Override
         protected void configure( HttpSecurity http ) throws Exception {
-            http.antMatcher( "/v*/**" )
+            http.requestMatchers()
+                    .antMatchers( HttpMethod.GET, "/v*/**" )
+                    .antMatchers( HttpMethod.POST, "/v*/**" )
+                    .antMatchers( HttpMethod.PUT, "/v*/**" )
+                    .antMatchers( HttpMethod.DELETE, "/v*/**" )
+                    .and()
                     .addFilterAfter( apiTokenDecisionFilter, UsernamePasswordAuthenticationFilter.class )
                     .csrf().disable()
         }
@@ -37,7 +43,12 @@ public class SecurityConfig {
 
         @Override
         protected void configure( HttpSecurity http ) throws Exception {
-            http.antMatcher( "/management/**" )
+            http.requestMatchers()
+                    .antMatchers( HttpMethod.GET, "/management/**" )
+                    .antMatchers( HttpMethod.POST, "/management/**" )
+                    .antMatchers( HttpMethod.PUT, "/management/**" )
+                    .antMatchers( HttpMethod.DELETE, "/management/**" )
+                    .and()
                     .authorizeRequests()
                         .anyRequest().access( managementAccess )
         }
